@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://jw2f5x6lx0v6"]
+[gd_scene load_steps=7 format=3 uid="uid://jw2f5x6lx0v6"]
 
-[ext_resource type="PackedScene" uid="uid://dmkwnjnu3gw8m" path="res://Enemy.tscn" id="1_kev23"]
+[ext_resource type="PackedScene" uid="uid://dmkwnjnu3gw8m" path="res://Scenes/Enemy.tscn" id="1_kev23"]
+[ext_resource type="PackedScene" uid="uid://c6r2fwt85ovpb" path="res://Scenes/HUD.tscn" id="2_8gcan"]
 
 [sub_resource type="Environment" id="Environment_cwouq"]
 ambient_light_source = 2
@@ -11,10 +12,12 @@ glow_enabled = true
 glow_blend_mode = 1
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_b7ug0"]
-vertices = PackedVector3Array(-9.5, 0.5, -9.5, -9.5, 0.5, 9.5, 9.5, 0.5, 9.5, 9.5, 0.5, -9.5)
+vertices = PackedVector3Array(-8.38769, 0.29551, -9.5, -8.38769, 0.29551, 9.5, 8.61231, 0.29551, 9.5, 8.61231, 0.29551, -9.5)
 polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_tdbik"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_1quir"]
 
 [node name="Nicklas" type="Node3D"]
 
@@ -31,6 +34,14 @@ navigation_mesh = SubResource("NavigationMesh_b7ug0")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 mesh = SubResource("PlaneMesh_tdbik")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 4.47083, 0, 0, 0, 19.6956, 9.64103, 2.03092, 0)
+mesh = SubResource("BoxMesh_1quir")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 4.47083, 0, 0, 0, 19.6956, -9.63769, 2.03092, 0)
+mesh = SubResource("BoxMesh_1quir")
 
 [node name="Lights" type="Node" parent="."]
 
@@ -69,3 +80,5 @@ omni_range = 6.98332
 [node name="OmniLight3D5" type="OmniLight3D" parent="Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.48112, 2.11236, -5.25413)
 light_energy = 6.98
+
+[node name="Hud" parent="." instance=ExtResource("2_8gcan")]
