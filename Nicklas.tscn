@@ -1,0 +1,71 @@
+[gd_scene load_steps=5 format=3 uid="uid://jw2f5x6lx0v6"]
+
+[ext_resource type="PackedScene" uid="uid://dmkwnjnu3gw8m" path="res://Enemy.tscn" id="1_kev23"]
+
+[sub_resource type="Environment" id="Environment_cwouq"]
+ambient_light_source = 2
+ambient_light_color = Color(0.423529, 0.45098, 0.615686, 1)
+ssr_enabled = true
+ssao_enabled = true
+glow_enabled = true
+glow_blend_mode = 1
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_b7ug0"]
+vertices = PackedVector3Array(-9.5, 0.5, -9.5, -9.5, 0.5, 9.5, 9.5, 0.5, 9.5, 9.5, 0.5, -9.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_tdbik"]
+
+[node name="Nicklas" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.61551, 0.788129, 0, -0.788129, 0.61551, 0, 7.77371, 7.02609)
+environment = SubResource("Environment_cwouq")
+far = 100.0
+
+[node name="Enemy" parent="." instance=ExtResource("1_kev23")]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_b7ug0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("PlaneMesh_tdbik")
+
+[node name="Lights" type="Node" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 0.408315, 0.912841, 0, -0.912841, 0.408315, -12.7524, 4.46016, -6.20921)
+shadow_enabled = true
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7184, 2.17885, -1.79786)
+light_color = Color(0.929412, 0.258824, 0.2, 1)
+light_energy = 3.101
+shadow_enabled = true
+omni_range = 6.98332
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.1416, 1.68878, -4.19823)
+light_energy = 3.101
+light_negative = true
+shadow_enabled = true
+omni_range = 6.98332
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.40596, 1.97403, 2.2276)
+light_energy = 3.101
+light_negative = true
+shadow_enabled = true
+omni_range = 6.98332
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.84222, 1.97403, 1.76564)
+light_energy = 3.101
+light_negative = true
+shadow_enabled = true
+omni_range = 6.98332
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.48112, 2.11236, -5.25413)
+light_energy = 6.98
