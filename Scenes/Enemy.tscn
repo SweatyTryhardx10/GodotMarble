@@ -36,5 +36,9 @@ shape = SubResource("SphereShape3D_0rc1d")
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_7vf2o")
 
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_energy = 3.101
+light_negative = true
+
 [connection signal="timeout" from="Patrol Frequency (Timer)" to="." method="OnTimerTimeout"]
 [connection signal="HasDied" from="Health" to="." method="OnHealthHasDied"]
