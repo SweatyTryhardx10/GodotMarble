@@ -1,0 +1,89 @@
+[gd_scene load_steps=8 format=3 uid="uid://jw2f5x6lx0v6"]
+
+[ext_resource type="Script" path="res://Scripts/Enemy.cs" id="1_747lo"]
+[ext_resource type="Script" path="res://Scripts/Health.cs" id="2_qaoxx"]
+
+[sub_resource type="Environment" id="Environment_cwouq"]
+background_mode = 2
+adjustment_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_a2u5y"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0rc1d"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_b7ug0"]
+vertices = PackedVector3Array(-9.5, 0.5, -9.5, -9.5, 0.5, 9.5, 9.5, 0.5, 9.5, 9.5, 0.5, -9.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_tdbik"]
+
+[node name="Nicklas" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.61551, 0.788129, 0, -0.788129, 0.61551, 0, 7.77371, 7.02609)
+environment = SubResource("Environment_cwouq")
+
+[node name="Enemy" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.38385, 0)
+script = ExtResource("1_747lo")
+movementSpeed = 6.24
+patrolAreaRadius = 10.0
+
+[node name="Patrol Frequency (Timer)" type="Timer" parent="Enemy"]
+autostart = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy"]
+mesh = SubResource("BoxMesh_a2u5y")
+skeleton = NodePath("../..")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="Enemy"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy"]
+shape = SubResource("SphereShape3D_0rc1d")
+
+[node name="Health" type="Node" parent="Enemy"]
+script = ExtResource("2_qaoxx")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_b7ug0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("PlaneMesh_tdbik")
+
+[node name="Lights" type="Node" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 0.408315, 0.912841, 0, -0.912841, 0.408315, -12.7524, 4.46016, -6.20921)
+shadow_enabled = true
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7184, 2.17885, -1.79786)
+light_color = Color(0.929412, 0.258824, 0.2, 1)
+light_energy = 3.101
+shadow_enabled = true
+omni_range = 6.98332
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.1416, 1.68878, -4.19823)
+light_energy = 3.101
+light_negative = true
+shadow_enabled = true
+omni_range = 6.98332
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.40596, 1.97403, 2.2276)
+light_energy = 3.101
+light_negative = true
+shadow_enabled = true
+omni_range = 6.98332
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.84222, 1.97403, 1.76564)
+light_energy = 3.101
+light_negative = true
+shadow_enabled = true
+omni_range = 6.98332
+
+[connection signal="timeout" from="Enemy/Patrol Frequency (Timer)" to="Enemy" method="OnTimerTimeout"]
+[connection signal="HasDied" from="Enemy/Health" to="Enemy" method="OnHealthHasDied"]
