@@ -1,10 +1,40 @@
-[gd_scene load_steps=2 format=3 uid="uid://cixypelnjvyvs"]
+[gd_scene load_steps=6 format=3 uid="uid://dmkwnjnu3gw8m"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_u2evh"]
+[ext_resource type="Script" path="res://Scripts/Enemy.cs" id="1_o7fv1"]
+[ext_resource type="Script" path="res://Scripts/Health.cs" id="2_7vf2o"]
 
-[node name="Enemy" type="Node3D"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d3squ"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.729412, 0, 0.0784314, 1)
+roughness = 0.24
+grow_amount = 0.281
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+[sub_resource type="BoxMesh" id="BoxMesh_a2u5y"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
-shape = SubResource("BoxShape3D_u2evh")
+[sub_resource type="SphereShape3D" id="SphereShape3D_0rc1d"]
+
+[node name="Enemy" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.38385, 0)
+script = ExtResource("1_o7fv1")
+movementSpeed = 6.24
+patrolAreaRadius = 10.0
+
+[node name="Patrol Frequency (Timer)" type="Timer" parent="."]
+autostart = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_d3squ")
+mesh = SubResource("BoxMesh_a2u5y")
+skeleton = NodePath("../..")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_0rc1d")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("2_7vf2o")
+
+[connection signal="timeout" from="Patrol Frequency (Timer)" to="." method="OnTimerTimeout"]
+[connection signal="HasDied" from="Health" to="." method="OnHealthHasDied"]

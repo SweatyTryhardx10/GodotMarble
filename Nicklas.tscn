@@ -1,15 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://jw2f5x6lx0v6"]
+[gd_scene load_steps=5 format=3 uid="uid://jw2f5x6lx0v6"]
 
-[ext_resource type="Script" path="res://Scripts/Enemy.cs" id="1_747lo"]
-[ext_resource type="Script" path="res://Scripts/Health.cs" id="2_qaoxx"]
+[ext_resource type="PackedScene" uid="uid://dmkwnjnu3gw8m" path="res://Enemy.tscn" id="1_kev23"]
 
 [sub_resource type="Environment" id="Environment_cwouq"]
-background_mode = 2
-adjustment_enabled = true
-
-[sub_resource type="BoxMesh" id="BoxMesh_a2u5y"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_0rc1d"]
+ambient_light_source = 2
+ambient_light_color = Color(0.423529, 0.45098, 0.615686, 1)
+ssr_enabled = true
+ssao_enabled = true
+glow_enabled = true
+glow_blend_mode = 1
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_b7ug0"]
 vertices = PackedVector3Array(-9.5, 0.5, -9.5, -9.5, 0.5, 9.5, 9.5, 0.5, 9.5, 9.5, 0.5, -9.5)
@@ -22,27 +21,9 @@ polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.61551, 0.788129, 0, -0.788129, 0.61551, 0, 7.77371, 7.02609)
 environment = SubResource("Environment_cwouq")
+far = 100.0
 
-[node name="Enemy" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.38385, 0)
-script = ExtResource("1_747lo")
-movementSpeed = 6.24
-patrolAreaRadius = 10.0
-
-[node name="Patrol Frequency (Timer)" type="Timer" parent="Enemy"]
-autostart = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy"]
-mesh = SubResource("BoxMesh_a2u5y")
-skeleton = NodePath("../..")
-
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="Enemy"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy"]
-shape = SubResource("SphereShape3D_0rc1d")
-
-[node name="Health" type="Node" parent="Enemy"]
-script = ExtResource("2_qaoxx")
+[node name="Enemy" parent="." instance=ExtResource("1_kev23")]
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_b7ug0")
@@ -85,5 +66,6 @@ light_negative = true
 shadow_enabled = true
 omni_range = 6.98332
 
-[connection signal="timeout" from="Enemy/Patrol Frequency (Timer)" to="Enemy" method="OnTimerTimeout"]
-[connection signal="HasDied" from="Enemy/Health" to="Enemy" method="OnHealthHasDied"]
+[node name="OmniLight3D5" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.48112, 2.11236, -5.25413)
+light_energy = 6.98
