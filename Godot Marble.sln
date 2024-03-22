@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34526.213
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Godot Marble", "Godot Marble.csproj", "{A2309E49-9C58-40FE-9A1F-6F6D4D5FDB90}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		ExportDebug|Any CPU = ExportDebug|Any CPU
+		ExportRelease|Any CPU = ExportRelease|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A2309E49-9C58-40FE-9A1F-6F6D4D5FDB90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2309E49-9C58-40FE-9A1F-6F6D4D5FDB90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2309E49-9C58-40FE-9A1F-6F6D4D5FDB90}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{A2309E49-9C58-40FE-9A1F-6F6D4D5FDB90}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{A2309E49-9C58-40FE-9A1F-6F6D4D5FDB90}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{A2309E49-9C58-40FE-9A1F-6F6D4D5FDB90}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9A76BFFB-258E-4822-BEAF-689EAB29FE28}
+	EndGlobalSection
+EndGlobal
