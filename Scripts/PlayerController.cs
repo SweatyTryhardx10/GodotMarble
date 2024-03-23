@@ -26,7 +26,17 @@ public partial class PlayerController : RigidBody3D
 				{
 					if (item is RigidBody3D item2)
 					{
-						item2.ApplyForce(Vector3.Up * SlamForce);
+						if(item2.ContactMonitor == true && item2.MaxContactsReported > 0)
+						{
+							if(item2.GetContactCount() > 0)
+							{
+								item2.ApplyForce(Vector3.Up * SlamForce);
+							}
+						}
+						else
+						{
+							item2.ApplyForce(Vector3.Up * SlamForce);
+						}
 					}
 				}
 			}
