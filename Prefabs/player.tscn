@@ -25,7 +25,9 @@ max_contacts_reported = 1
 contact_monitor = true
 script = ExtResource("1_5s1ht")
 SlamVelocity = 100.0
+
 cameraPrefab = ExtResource("2_jeut4")
+area3D = NodePath("Area3D")
 
 [node name="MarbleCollider" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_jq6ae")

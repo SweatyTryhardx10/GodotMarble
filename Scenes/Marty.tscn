@@ -1,17 +1,17 @@
-[gd_scene load_steps=21 format=3 uid="uid://blat08wlfhomp"]
+[gd_scene load_steps=22 format=3 uid="uid://blat08wlfhomp"]
 
 [ext_resource type="Script" path="res://Scripts/ChaseCamera.cs" id="1_i3ol0"]
 [ext_resource type="PackedScene" uid="uid://b881ihonj4cd8" path="res://Prefabs/player.tscn" id="2_h6jnr"]
-[ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_blue3.tres" id="4_su3k4"]
+[ext_resource type="Texture2D" uid="uid://chb65y16yotcy" path="res://Textures/gridbox-prototype/prototype_512x512_blue1.png" id="5_1ud5g"]
 [ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_blue2.tres" id="5_b1c5y"]
-[ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_blue1.tres" id="6_jtwyu"]
 [ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_cyan.tres" id="7_fabhw"]
 [ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_green1.tres" id="8_65dog"]
 [ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_green2.tres" id="9_bsqnn"]
 [ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_red.tres" id="10_u3pqc"]
 [ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_yellow.tres" id="11_g5l85"]
+[ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_purple.tres" id="12_42wwl"]
 [ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_orange.tres" id="12_383y5"]
-[ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_purple.tres" id="13_uowpk"]
+[ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_blue3.tres" id="13_uowpk"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yg88o"]
 
@@ -33,6 +33,11 @@ size = Vector3(10, 1, 10)
 [sub_resource type="BoxShape3D" id="BoxShape3D_ndfld"]
 size = Vector3(10, 1, 10)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5sp3r"]
+albedo_texture = ExtResource("5_1ud5g")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
 [node name="Marty" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
@@ -53,6 +58,8 @@ shadow_enabled = true
 [node name="Cube" type="RigidBody3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.72904, 1.25079, 1.26122)
 physics_material_override = SubResource("PhysicsMaterial_yg88o")
+max_contacts_reported = 1
+contact_monitor = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/Cube"]
 shape = SubResource("BoxShape3D_83egl")
@@ -71,7 +78,7 @@ shape = SubResource("BoxShape3D_dgelw")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/Floor"]
 transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, -0.0263553, 0, 0)
-material_override = ExtResource("4_su3k4")
+material_override = ExtResource("13_uowpk")
 mesh = SubResource("PlaneMesh_b3np8")
 skeleton = NodePath("../../..")
 
@@ -100,7 +107,7 @@ shape = SubResource("BoxShape3D_ndfld")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/Floor3"]
 transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 5, 0, 0, 0)
-material_override = ExtResource("6_jtwyu")
+material_override = SubResource("StandardMaterial3D_5sp3r")
 mesh = SubResource("PlaneMesh_b3np8")
 skeleton = NodePath("../../Floor3")
 
@@ -205,6 +212,6 @@ shape = SubResource("BoxShape3D_ndfld")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/Floor7"]
 transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 5, 0, 0, 0)
-material_override = ExtResource("13_uowpk")
+material_override = ExtResource("12_42wwl")
 mesh = SubResource("PlaneMesh_b3np8")
 skeleton = NodePath("../../Floor3")
