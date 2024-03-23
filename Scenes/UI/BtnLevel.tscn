@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://x2jkh8gddge6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_pp6nl"]
+font_size = 24
+
+[node name="BtnLevel" type="Button"]
+offset_right = 118.0
+offset_bottom = 72.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "level"
+label_settings = SubResource("LabelSettings_pp6nl")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
