@@ -13,9 +13,7 @@ public partial class Indicator : TextureRect
 
 	private void TryGetTarget()
 	{
-		string sceneName = GetTree().CurrentScene.Name;
-		GD.Print("Root scene: " + sceneName);
-		followTarget = GetNode<Node3D>($"/root/{sceneName}/Enemy");
+		followTarget = PlayerController.Instance;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
