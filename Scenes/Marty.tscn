@@ -1,17 +1,17 @@
-[gd_scene load_steps=21 format=3 uid="uid://blat08wlfhomp"]
+[gd_scene load_steps=31 format=3 uid="uid://blat08wlfhomp"]
 
 [ext_resource type="Script" path="res://Scripts/ChaseCamera.cs" id="1_i3ol0"]
 [ext_resource type="PackedScene" uid="uid://b881ihonj4cd8" path="res://Prefabs/player.tscn" id="2_h6jnr"]
-[ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_blue3.tres" id="4_su3k4"]
-[ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_blue2.tres" id="5_b1c5y"]
-[ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_blue1.tres" id="6_jtwyu"]
-[ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_cyan.tres" id="7_fabhw"]
-[ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_green1.tres" id="8_65dog"]
-[ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_green2.tres" id="9_bsqnn"]
-[ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_red.tres" id="10_u3pqc"]
-[ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_yellow.tres" id="11_g5l85"]
-[ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_orange.tres" id="12_383y5"]
-[ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_purple.tres" id="13_uowpk"]
+[ext_resource type="Texture2D" uid="uid://1s8gk2pnms3q" path="res://Textures/gridbox-prototype/prototype_512x512_blue3.png" id="3_cq1t0"]
+[ext_resource type="Texture2D" uid="uid://crworx7ak41ni" path="res://Textures/gridbox-prototype/prototype_512x512_blue2.png" id="4_flvsc"]
+[ext_resource type="Texture2D" uid="uid://chb65y16yotcy" path="res://Textures/gridbox-prototype/prototype_512x512_blue1.png" id="5_1ud5g"]
+[ext_resource type="Texture2D" uid="uid://btxp2uyks7j83" path="res://Textures/gridbox-prototype/prototype_512x512_cyan.png" id="6_fu55e"]
+[ext_resource type="Texture2D" uid="uid://ffy4bbt533rm" path="res://Textures/gridbox-prototype/prototype_512x512_green1.png" id="7_i8qdo"]
+[ext_resource type="Texture2D" uid="uid://c2tkr6gboefdk" path="res://Textures/gridbox-prototype/prototype_512x512_green2.png" id="8_v5ukn"]
+[ext_resource type="Texture2D" uid="uid://57hdescbiw3e" path="res://Textures/gridbox-prototype/prototype_512x512_red.png" id="9_wd7jn"]
+[ext_resource type="Texture2D" uid="uid://b1ce08ohvsva1" path="res://Textures/gridbox-prototype/prototype_512x512_yellow.png" id="10_xrjl6"]
+[ext_resource type="Texture2D" uid="uid://dy88vrrt23aru" path="res://Textures/gridbox-prototype/prototype_512x512_orange.png" id="11_j7vl0"]
+[ext_resource type="Texture2D" uid="uid://dkbb15e8mv6dk" path="res://Textures/gridbox-prototype/prototype_512x512_purple.png" id="12_1p1yq"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yg88o"]
 
@@ -24,14 +24,64 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_dgelw"]
 size = Vector3(100, 1, 100)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jmrf4"]
+albedo_texture = ExtResource("3_cq1t0")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_b3np8"]
 lightmap_size_hint = Vector2i(12, 12)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_m53nn"]
 size = Vector3(10, 1, 10)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yv6me"]
+albedo_texture = ExtResource("4_flvsc")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_ndfld"]
 size = Vector3(10, 1, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aqpvt"]
+albedo_texture = ExtResource("5_1ud5g")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_il8k4"]
+albedo_texture = ExtResource("6_fu55e")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0258r"]
+albedo_texture = ExtResource("7_i8qdo")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pn7qe"]
+albedo_texture = ExtResource("8_v5ukn")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5faxe"]
+albedo_texture = ExtResource("9_wd7jn")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3wvvt"]
+albedo_texture = ExtResource("10_xrjl6")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j2mnl"]
+albedo_texture = ExtResource("11_j7vl0")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v0lgm"]
+albedo_texture = ExtResource("12_1p1yq")
+uv1_triplanar = true
+uv1_world_triplanar = true
 
 [node name="Marty" type="Node3D"]
 
@@ -53,6 +103,8 @@ shadow_enabled = true
 [node name="Cube" type="RigidBody3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.72904, 1.25079, 1.26122)
 physics_material_override = SubResource("PhysicsMaterial_yg88o")
+max_contacts_reported = 1
+contact_monitor = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/Cube"]
 shape = SubResource("BoxShape3D_83egl")
@@ -71,7 +123,7 @@ shape = SubResource("BoxShape3D_dgelw")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/Floor"]
 transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, -0.0263553, 0, 0)
-material_override = ExtResource("4_su3k4")
+material_override = SubResource("StandardMaterial3D_jmrf4")
 mesh = SubResource("PlaneMesh_b3np8")
 skeleton = NodePath("../../..")
 
@@ -86,7 +138,7 @@ shape = SubResource("BoxShape3D_m53nn")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/Floor2"]
 transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 5, 0, 0, 0)
-material_override = ExtResource("5_b1c5y")
+material_override = SubResource("StandardMaterial3D_yv6me")
 mesh = SubResource("PlaneMesh_b3np8")
 
 [node name="Floor3" type="RigidBody3D" parent="World"]
@@ -100,7 +152,7 @@ shape = SubResource("BoxShape3D_ndfld")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/Floor3"]
 transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 5, 0, 0, 0)
-material_override = ExtResource("6_jtwyu")
+material_override = SubResource("StandardMaterial3D_aqpvt")
 mesh = SubResource("PlaneMesh_b3np8")
 skeleton = NodePath("../../Floor3")
 
@@ -115,7 +167,7 @@ shape = SubResource("BoxShape3D_ndfld")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/Floor4"]
 transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 5, 0, 0, 0)
-material_override = ExtResource("7_fabhw")
+material_override = SubResource("StandardMaterial3D_il8k4")
 mesh = SubResource("PlaneMesh_b3np8")
 skeleton = NodePath("../../Floor3")
 
@@ -130,7 +182,7 @@ shape = SubResource("BoxShape3D_ndfld")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/Floor5"]
 transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 5, 0, 0, 0)
-material_override = ExtResource("8_65dog")
+material_override = SubResource("StandardMaterial3D_0258r")
 mesh = SubResource("PlaneMesh_b3np8")
 skeleton = NodePath("../../Floor3")
 
@@ -145,7 +197,7 @@ shape = SubResource("BoxShape3D_ndfld")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/Floor6"]
 transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 5, 0, 0, 0)
-material_override = ExtResource("9_bsqnn")
+material_override = SubResource("StandardMaterial3D_pn7qe")
 mesh = SubResource("PlaneMesh_b3np8")
 skeleton = NodePath("../../Floor3")
 
@@ -160,7 +212,7 @@ shape = SubResource("BoxShape3D_ndfld")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/Floor8"]
 transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 5, 0, 0, 0)
-material_override = ExtResource("10_u3pqc")
+material_override = SubResource("StandardMaterial3D_5faxe")
 mesh = SubResource("PlaneMesh_b3np8")
 skeleton = NodePath("../../Floor3")
 
@@ -175,7 +227,7 @@ shape = SubResource("BoxShape3D_ndfld")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/Floor10"]
 transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 5, 0, 0, 0)
-material_override = ExtResource("11_g5l85")
+material_override = SubResource("StandardMaterial3D_3wvvt")
 mesh = SubResource("PlaneMesh_b3np8")
 skeleton = NodePath("../../Floor3")
 
@@ -190,7 +242,7 @@ shape = SubResource("BoxShape3D_ndfld")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/Floor9"]
 transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 5, 0, 0, 0)
-material_override = ExtResource("12_383y5")
+material_override = SubResource("StandardMaterial3D_j2mnl")
 mesh = SubResource("PlaneMesh_b3np8")
 skeleton = NodePath("../../Floor3")
 
@@ -205,6 +257,6 @@ shape = SubResource("BoxShape3D_ndfld")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/Floor7"]
 transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 5, 0, 0, 0)
-material_override = ExtResource("13_uowpk")
+material_override = SubResource("StandardMaterial3D_v0lgm")
 mesh = SubResource("PlaneMesh_b3np8")
 skeleton = NodePath("../../Floor3")
