@@ -1,0 +1,132 @@
+[gd_scene load_steps=8 format=3 uid="uid://dclstik3gb257"]
+
+[ext_resource type="Texture2D" uid="uid://p2yerrtjjfkl" path="res://icon.svg" id="1_mvofy"]
+[ext_resource type="Script" path="res://Scripts/MainMenu.cs" id="1_ngsuk"]
+[ext_resource type="PackedScene" uid="uid://jw2f5x6lx0v6" path="res://Scenes/Nicklas.tscn" id="2_7hm6t"]
+[ext_resource type="PackedScene" path="res://Scenes/Marty.tscn" id="3_ddjsu"]
+[ext_resource type="PackedScene" uid="uid://x2jkh8gddge6" path="res://Scenes/UI/BtnLevel.tscn" id="3_q3egg"]
+[ext_resource type="PackedScene" uid="uid://cervu86sb3c7t" path="res://Scenes/TestScene.tscn" id="4_c7j7p"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_giaoo"]
+font_size = 64
+
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("titlePanel", "levelSelectPanel", "levelButtonGroup")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ngsuk")
+levels = Array[PackedScene]([ExtResource("2_7hm6t"), ExtResource("3_ddjsu"), ExtResource("4_c7j7p")])
+titlePanel = NodePath("Title Screen")
+levelSelectPanel = NodePath("Level Select")
+levelButtonGroup = NodePath("Level Select/GridContainer")
+levelButtonPrefab = ExtResource("3_q3egg")
+
+[node name="Title Screen" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BtnPlay" type="Button" parent="Title Screen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = 40.685
+offset_right = 110.0
+offset_bottom = 89.685
+grow_horizontal = 2
+grow_vertical = 2
+text = "PLAY GAME"
+
+[node name="BtnExit" type="Button" parent="Title Screen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = 98.47
+offset_right = 110.0
+offset_bottom = 147.47
+grow_horizontal = 2
+grow_vertical = 2
+text = "EXIT"
+
+[node name="Label" type="Label" parent="Title Screen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -576.0
+offset_right = 576.0
+offset_bottom = 155.0
+grow_horizontal = 2
+text = "GODOT MARBLE"
+label_settings = SubResource("LabelSettings_giaoo")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Title Screen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -64.0
+offset_top = 134.885
+offset_right = 64.0
+offset_bottom = 262.885
+grow_horizontal = 2
+texture = ExtResource("1_mvofy")
+
+[node name="Level Select" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Level Select"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -295.0
+offset_right = 295.0
+offset_bottom = 131.0
+grow_horizontal = 2
+text = "LEVELS"
+label_settings = SubResource("LabelSettings_giaoo")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="Level Select"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -417.0
+offset_top = -503.0
+offset_right = 417.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 0
+columns = 5
+
+[connection signal="pressed" from="Title Screen/BtnPlay" to="." method="OnBtnPlayPressed"]
+[connection signal="pressed" from="Title Screen/BtnExit" to="." method="OnBtnExitPressed"]
