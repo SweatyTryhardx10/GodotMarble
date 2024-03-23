@@ -2,11 +2,29 @@ using Godot;
 
 public partial class PlayerController : RigidBody3D
 {
-	[Export] private float Speed = 5.0f;
+	public static PlayerController Instance { get; private set; }
+
+	public PlayerController()
+	{
+		Instance = this;
+	}
+
+    public override void _Ready()
+    {
+        base._Ready();
+		
+		// Instantiate and configure camera on spawn
+		var cam = cameraPrefab.Instantiate<ChaseCamera>();
+		cam.target = this;
+		GetParent().AddChild(cam);
+    }
+
+    [Export] private float Speed = 5.0f;
 	[Export] private float JumpVelocity = 4.5f;
 	[Export] private float SlamVelocity = 4.5f;
 	[Export] private float SlamForce = 500f;
 	[Export] private Area3D area3D;
+	[Export] private PackedScene cameraPrefab;
 	private bool isSlamming = false;
 	public override void _PhysicsProcess(double delta)
 	{

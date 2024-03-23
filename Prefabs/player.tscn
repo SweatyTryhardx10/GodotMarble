@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://b881ihonj4cd8"]
+[gd_scene load_steps=9 format=3 uid="uid://b881ihonj4cd8"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerController.cs" id="1_5s1ht"]
+[ext_resource type="PackedScene" uid="uid://01yr66718b6v" path="res://Prefabs/chase_cam.tscn" id="2_jeut4"]
 [ext_resource type="Texture2D" uid="uid://p2yerrtjjfkl" path="res://icon.svg" id="2_yxxwr"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vdoeu"]
@@ -16,7 +17,7 @@ material = SubResource("StandardMaterial3D_7k4j7")
 [sub_resource type="SphereShape3D" id="SphereShape3D_ivhby"]
 radius = 0.7218
 
-[node name="Player" type="RigidBody3D" node_paths=PackedStringArray("area3D")]
+[node name="Player" type="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00389004, 2.19659, -2.0347)
 physics_material_override = SubResource("PhysicsMaterial_vdoeu")
 continuous_cd = true
@@ -24,6 +25,8 @@ max_contacts_reported = 1
 contact_monitor = true
 script = ExtResource("1_5s1ht")
 SlamVelocity = 100.0
+
+cameraPrefab = ExtResource("2_jeut4")
 area3D = NodePath("Area3D")
 
 [node name="MarbleCollider" type="CollisionShape3D" parent="."]
