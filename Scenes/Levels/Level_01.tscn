@@ -1,10 +1,10 @@
 [gd_scene load_steps=20 format=3 uid="uid://du7lxxhjet31"]
 
-[ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_green2.tres" id="1_31mg4"]
+[ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_yellow.tres" id="1_31mg4"]
 [ext_resource type="Texture2D" uid="uid://dkbb15e8mv6dk" path="res://Textures/gridbox-prototype/prototype_512x512_purple.png" id="4_30p28"]
 [ext_resource type="Texture2D" uid="uid://c4siiq1mrargy" path="res://Textures/gridbox-prototype/prototype_512x512_grey2.png" id="5_fs7d5"]
 [ext_resource type="Texture2D" uid="uid://dy88vrrt23aru" path="res://Textures/gridbox-prototype/prototype_512x512_orange.png" id="5_p6f6r"]
-[ext_resource type="PackedScene" uid="uid://ngddmglqy453" path="res://Prefabs/spawn.tscn" id="6_j1j4p"]
+[ext_resource type="PackedScene" path="res://Prefabs/spawn.tscn" id="6_j1j4p"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qeem6"]
 size = Vector3(7.06176, 1, 8.99707)
