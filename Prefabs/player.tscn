@@ -1,6 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://b881ihonj4cd8"]
+[gd_scene load_steps=9 format=3 uid="uid://b881ihonj4cd8"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerController.cs" id="1_5s1ht"]
+[ext_resource type="PackedScene" uid="uid://01yr66718b6v" path="res://Prefabs/chase_cam.tscn" id="2_jeut4"]
 [ext_resource type="Texture2D" uid="uid://p2yerrtjjfkl" path="res://icon.svg" id="2_yxxwr"]
 [ext_resource type="AudioStream" uid="uid://ditq27m8wm7fh" path="res://Sounds/explosion.wav" id="3_ga814"]
 
@@ -25,6 +27,8 @@ max_contacts_reported = 1
 contact_monitor = true
 script = ExtResource("1_5s1ht")
 SlamVelocity = 100.0
+
+cameraPrefab = ExtResource("2_jeut4")
 area3D = NodePath("Area3D")
 audioStreamPlayer3D = NodePath("AudioStreamPlayer3D")
 
