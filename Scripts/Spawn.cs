@@ -12,7 +12,7 @@ public partial class Spawn : Node3D
 	{
 		Instance = this;
 		
-		SpawnPlayer();
+		// SpawnPlayer();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -22,7 +22,7 @@ public partial class Spawn : Node3D
 			SpawnPlayer();
 	}
 
-	private void SpawnPlayer()
+	public void SpawnPlayer()
 	{
 		PlayerController player = PlayerController.Instance;
 		if (player == null)
@@ -33,8 +33,10 @@ public partial class Spawn : Node3D
 		}
 
 		// Reset player's position to the spawn position
-		PlayerController.Instance.Position = Position;
+		PlayerController.Instance.GlobalPosition = Position;
 		PlayerController.Instance.LinearVelocity = Vector3.Zero;
 		PlayerController.Instance.AngularVelocity = Vector3.Zero;
+		
+		GD.Print("Player has been respawned!");
 	}
 }
