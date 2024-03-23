@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://dnel2ypv6q0au"]
+[gd_scene load_steps=3 format=3 uid="uid://dnel2ypv6q0au"]
+
+[ext_resource type="PackedScene" uid="uid://dclstik3gb257" path="res://Scenes/MainMenu.tscn" id="1_qs6t8"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_8c22i"]
 
@@ -6,3 +8,5 @@
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_8c22i")
+
+[node name="MainMenu" parent="." instance=ExtResource("1_qs6t8")]
