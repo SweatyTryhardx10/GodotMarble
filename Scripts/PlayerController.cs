@@ -7,6 +7,7 @@ public partial class PlayerController : RigidBody3D
 	[Export] private float SlamVelocity = 4.5f;
 	[Export] private float SlamForce = 500f;
 	[Export] private Area3D area3D;
+	[Export] private AudioStreamPlayer3D audioStreamPlayer3D;
 	private bool isSlamming = false;
 	public override void _PhysicsProcess(double delta)
 	{
@@ -26,16 +27,18 @@ public partial class PlayerController : RigidBody3D
 				{
 					if (item is RigidBody3D item2)
 					{
-						if(item2.ContactMonitor == true && item2.MaxContactsReported > 0)
+						if (item2.ContactMonitor == true && item2.MaxContactsReported > 0)
 						{
-							if(item2.GetContactCount() > 0)
+							if (item2.GetContactCount() > 0)
 							{
 								item2.ApplyForce(Vector3.Up * SlamForce);
+								audioStreamPlayer3D.Play();
 							}
 						}
 						else
 						{
 							item2.ApplyForce(Vector3.Up * SlamForce);
+							audioStreamPlayer3D.Play();
 						}
 					}
 				}
