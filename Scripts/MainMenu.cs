@@ -15,6 +15,8 @@ public partial class MainMenu : Control
 	private Control levelButtonGroup;
 	[Export]
 	private PackedScene levelButtonPrefab;
+	[Export]
+	private PackedScene hudPrefab;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -23,14 +25,14 @@ public partial class MainMenu : Control
 		{
 			// Instantiate button
 			var btn = levelButtonPrefab.Instantiate();
-			
+
 			// Load scene on button click
 			int loadIndex = i;
 			(btn as Button).Pressed += () => { LoadScene(loadIndex); };
-			
+
 			// Change text on nested label on button
 			btn.GetNode<Label>("Label").Text = levels[i].ResourcePath.Split('/').Last();
-						
+
 			// Add button to the button group
 			levelButtonGroup.AddChild(btn);
 		}
@@ -40,7 +42,7 @@ public partial class MainMenu : Control
 	public override void _Process(double delta)
 	{
 	}
-	
+
 	private void LoadScene(int sceneIndex)
 	{
 		if (sceneIndex > (levels.Length - 1))
@@ -63,6 +65,14 @@ public partial class MainMenu : Control
 
 		// Set loaded scene as the current scene (???)
 		GetTree().CurrentScene = scene;
+
+		// Add HUD to the game (the root node)
+		// ...if it doesn't exist
+		if (!HUD.exists)
+		{
+			var hud = hudPrefab.Instantiate();
+			GetTree().Root.AddChild(hud);
+		}
 
 		GD.Print($"Scene {sceneIndex} loaded!");
 	}
