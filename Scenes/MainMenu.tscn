@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dclstik3gb257"]
+[gd_scene load_steps=11 format=3 uid="uid://dclstik3gb257"]
 
 [ext_resource type="Texture2D" uid="uid://p2yerrtjjfkl" path="res://icon.svg" id="1_mvofy"]
 [ext_resource type="Script" path="res://Scripts/MainMenu.cs" id="1_ngsuk"]
@@ -8,11 +8,12 @@
 [ext_resource type="PackedScene" uid="uid://cervu86sb3c7t" path="res://Scenes/TestScene.tscn" id="4_c7j7p"]
 [ext_resource type="PackedScene" uid="uid://du7lxxhjet31" path="res://Scenes/Levels/Level_01.tscn" id="5_he7c6"]
 [ext_resource type="PackedScene" uid="uid://c6r2fwt85ovpb" path="res://Scenes/HUD.tscn" id="7_u1rs8"]
+[ext_resource type="Script" path="res://Scenes/VolumeSlider.cs" id="9_prsiu"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_giaoo"]
 font_size = 64
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("titlePanel", "levelSelectPanel", "levelButtonGroup")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("titlePanel", "levelSelectPanel", "levelButtonGroup", "optionsPanel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,6 +27,7 @@ levelSelectPanel = NodePath("Level Select")
 levelButtonGroup = NodePath("Level Select/GridContainer")
 levelButtonPrefab = ExtResource("3_q3egg")
 hudPrefab = ExtResource("7_u1rs8")
+optionsPanel = NodePath("Options")
 
 [node name="Title Screen" type="Control" parent="."]
 layout_mode = 1
@@ -44,12 +46,27 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -110.0
-offset_top = 40.685
+offset_top = 40.0
 offset_right = 110.0
-offset_bottom = 89.685
+offset_bottom = 89.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "PLAY GAME"
+
+[node name="BtnOptions" type="Button" parent="Title Screen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = 100.0
+offset_right = 110.0
+offset_bottom = 149.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "OPTIONS"
 
 [node name="BtnExit" type="Button" parent="Title Screen"]
 layout_mode = 1
@@ -59,9 +76,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -110.0
-offset_top = 98.47
+offset_top = 160.0
 offset_right = 110.0
-offset_bottom = 147.47
+offset_bottom = 209.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "EXIT"
@@ -131,5 +148,61 @@ grow_horizontal = 2
 grow_vertical = 0
 columns = 5
 
+[node name="Options" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Container" type="Control" parent="Options"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -388.0
+offset_top = -170.0
+offset_right = 388.0
+offset_bottom = 216.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Slider (and text)" type="Control" parent="Options/Container"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 58.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="Options/Container/Slider (and text)"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 30.0
+grow_horizontal = 2
+text = "Master Volume"
+horizontal_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="Options/Container/Slider (and text)"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -174.5
+offset_top = -31.0
+offset_right = 174.5
+grow_horizontal = 2
+grow_vertical = 0
+value = 70.0
+script = ExtResource("9_prsiu")
+
 [connection signal="pressed" from="Title Screen/BtnPlay" to="." method="OnBtnPlayPressed"]
+[connection signal="pressed" from="Title Screen/BtnOptions" to="." method="OnBtnOptionsPressed"]
 [connection signal="pressed" from="Title Screen/BtnExit" to="." method="OnBtnExitPressed"]
+[connection signal="value_changed" from="Options/Container/Slider (and text)/HSlider" to="Options/Container/Slider (and text)/HSlider" method="OnValueChanged"]

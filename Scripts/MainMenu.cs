@@ -5,18 +5,16 @@ using System.Linq;
 
 public partial class MainMenu : Control
 {
-	[Export]
-	private PackedScene[] levels;
-	[Export]
-	private Control titlePanel;
-	[Export]
-	private Control levelSelectPanel;
-	[Export]
-	private Control levelButtonGroup;
-	[Export]
-	private PackedScene levelButtonPrefab;
-	[Export]
-	private PackedScene hudPrefab;
+	[Export] private PackedScene[] levels;
+
+	[Export] private Control titlePanel;
+	
+	[Export] private Control levelSelectPanel;
+	[Export] private Control levelButtonGroup;
+	[Export] private PackedScene levelButtonPrefab;
+	[Export] private PackedScene hudPrefab;
+	
+	[Export] private Control optionsPanel;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -55,8 +53,9 @@ public partial class MainMenu : Control
 		GD.Print("Attempting to remove node: " + this.Name);
 		QueueFree();
 
-		// Load the scene file
+		// Request load
 		ResourceLoader.LoadThreadedRequest(levels[sceneIndex].ResourcePath);
+		// Get file from load request (halts application until fully loaded)
 		PackedScene loadedScene = (PackedScene)ResourceLoader.LoadThreadedGet(levels[sceneIndex].ResourcePath);
 
 		// Instantiate the loaded scene
@@ -81,6 +80,13 @@ public partial class MainMenu : Control
 	{
 		titlePanel.Visible = false;
 		levelSelectPanel.Visible = true;
+	}
+
+	private void OnBtnOptionsPressed()
+	{
+		optionsPanel.Visible = true;
+		titlePanel.Visible = false;
+		levelSelectPanel.Visible = false;
 	}
 
 	private void OnBtnExitPressed()
