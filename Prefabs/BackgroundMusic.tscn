@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://77c3vvofoxd8"]
+
+[ext_resource type="AudioStream" uid="uid://df1valve1544k" path="res://Sounds/Airport Lounge - Disco Ultralounge - Kevin MacLeod.mp3" id="1_c1b2c"]
+
+[node name="BackgroundMusic" type="AudioStreamPlayer"]
+stream = ExtResource("1_c1b2c")
+autoplay = true

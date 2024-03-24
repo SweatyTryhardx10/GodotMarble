@@ -1,8 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://b881ihonj4cd8"]
+[gd_scene load_steps=17 format=3 uid="uid://b881ihonj4cd8"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerController.cs" id="1_5s1ht"]
 [ext_resource type="PackedScene" uid="uid://01yr66718b6v" path="res://Prefabs/chase_cam.tscn" id="2_jeut4"]
 [ext_resource type="Texture2D" uid="uid://p2yerrtjjfkl" path="res://icon.svg" id="2_yxxwr"]
+[ext_resource type="AudioStream" uid="uid://vc8mmnuiv1wd" path="res://Sounds/explosion1.wav" id="3_ynnj1"]
+[ext_resource type="AudioStream" uid="uid://ccmdk5mjo7vil" path="res://Sounds/explosion2.wav" id="4_yxv1t"]
+[ext_resource type="AudioStream" uid="uid://bxyx7h34sorw8" path="res://Sounds/explosion3.wav" id="5_alfkk"]
+[ext_resource type="AudioStream" uid="uid://bmbc1c0kkqv6y" path="res://Sounds/jump1.wav" id="7_324x4"]
+[ext_resource type="AudioStream" uid="uid://cfti2c5dufkht" path="res://Sounds/jump2.wav" id="8_0ksb4"]
+[ext_resource type="AudioStream" uid="uid://c485w4sei0gm5" path="res://Sounds/jump3.wav" id="9_s4cq8"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vdoeu"]
 
@@ -17,7 +23,28 @@ material = SubResource("StandardMaterial3D_7k4j7")
 [sub_resource type="SphereShape3D" id="SphereShape3D_ivhby"]
 radius = 0.7218
 
-[node name="Player" type="RigidBody3D"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_6f615"]
+random_pitch = 2.0
+streams_count = 3
+stream_0/stream = ExtResource("3_ynnj1")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("4_yxv1t")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("5_alfkk")
+stream_2/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_oq7of"]
+random_pitch = 2.0
+streams_count = 3
+stream_0/stream = ExtResource("7_324x4")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("8_0ksb4")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("9_s4cq8")
+stream_2/weight = 1.0
+
+[node name="Player" type="RigidBody3D" node_paths=PackedStringArray("area3D", "groundSlamSound", "jumpSound")]
+
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00389004, 2.19659, -2.0347)
 physics_material_override = SubResource("PhysicsMaterial_vdoeu")
 continuous_cd = true
@@ -25,7 +52,11 @@ max_contacts_reported = 1
 contact_monitor = true
 script = ExtResource("1_5s1ht")
 SlamVelocity = 100.0
-cameraPrefab = ExtResource("2_jeut4")
+
+area3D = NodePath("Area3D")
+groundSlamSound = NodePath("GroundSlam")
+jumpSound = NodePath("Jump")
+cameraPrefab = ExtResource("2_2viy4")
 
 [node name="MarbleCollider" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_jq6ae")
@@ -39,3 +70,9 @@ gravity_point_unit_distance = 15.581
 [node name="SlamCollider" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 shape = SubResource("SphereShape3D_ivhby")
+
+[node name="GroundSlam" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_6f615")
+
+[node name="Jump" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_oq7of")

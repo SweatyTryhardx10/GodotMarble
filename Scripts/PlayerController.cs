@@ -24,7 +24,8 @@ public partial class PlayerController : RigidBody3D
 	[Export] private float SlamVelocity = 4.5f;
 	[Export] private float SlamForce = 500f;
 	[Export] private Area3D area3D;
-	[Export] private AudioStreamPlayer3D audioStreamPlayer3D;
+	[Export] private AudioStreamPlayer3D groundSlamSound;
+	[Export] private AudioStreamPlayer3D jumpSound;
 	[Export] private PackedScene cameraPrefab;
 	private bool isSlamming = false;
 	public override void _PhysicsProcess(double delta)
@@ -50,13 +51,13 @@ public partial class PlayerController : RigidBody3D
 							if (item2.GetContactCount() > 0)
 							{
 								item2.ApplyForce(Vector3.Up * SlamForce);
-								audioStreamPlayer3D.Play();
+								groundSlamSound.Play();
 							}
 						}
 						else
 						{
 							item2.ApplyForce(Vector3.Up * SlamForce);
-							audioStreamPlayer3D.Play();
+							groundSlamSound.Play();
 						}
 					}
 				}
@@ -68,6 +69,7 @@ public partial class PlayerController : RigidBody3D
 	{
 		if (Input.IsActionJustPressed("ui_accept") && GetContactCount() > 0)
 		{
+			jumpSound.Play();
 			ApplyCentralImpulse(Vector3.Up * JumpVelocity);
 		}
 		if (Input.IsActionJustPressed("ui_accept") && GetContactCount() <= 0)
