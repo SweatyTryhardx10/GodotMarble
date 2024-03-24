@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://b881ihonj4cd8"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerController.cs" id="1_5s1ht"]
-[ext_resource type="PackedScene" path="res://Prefabs/chase_cam.tscn" id="2_2viy4"]
+[ext_resource type="PackedScene" uid="uid://01yr66718b6v" path="res://Prefabs/chase_cam.tscn" id="2_jeut4"]
 [ext_resource type="Texture2D" uid="uid://p2yerrtjjfkl" path="res://icon.svg" id="2_yxxwr"]
 [ext_resource type="AudioStream" uid="uid://vc8mmnuiv1wd" path="res://Sounds/explosion1.wav" id="3_ynnj1"]
 [ext_resource type="AudioStream" uid="uid://ccmdk5mjo7vil" path="res://Sounds/explosion2.wav" id="4_yxv1t"]
@@ -44,6 +44,7 @@ stream_2/stream = ExtResource("9_s4cq8")
 stream_2/weight = 1.0
 
 [node name="Player" type="RigidBody3D" node_paths=PackedStringArray("area3D", "groundSlamSound", "jumpSound")]
+
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00389004, 2.19659, -2.0347)
 physics_material_override = SubResource("PhysicsMaterial_vdoeu")
 continuous_cd = true
@@ -51,6 +52,7 @@ max_contacts_reported = 1
 contact_monitor = true
 script = ExtResource("1_5s1ht")
 SlamVelocity = 100.0
+
 area3D = NodePath("Area3D")
 groundSlamSound = NodePath("GroundSlam")
 jumpSound = NodePath("Jump")

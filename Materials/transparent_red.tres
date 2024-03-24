@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://grjijbhlfp5j"]
+
+[ext_resource type="Texture2D" uid="uid://p2yerrtjjfkl" path="res://icon.svg" id="1_u8boj"]
+
+[resource]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(1, 0, 0, 0.807843)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 0.35
+emission_texture = ExtResource("1_u8boj")
+uv1_triplanar = true
+uv1_world_triplanar = true
+proximity_fade_enabled = true

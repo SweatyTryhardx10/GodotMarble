@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c6r2fwt85ovpb"]
+[gd_scene load_steps=10 format=3 uid="uid://c6r2fwt85ovpb"]
 
 [ext_resource type="Script" path="res://Scripts/HUD.cs" id="1_41fwl"]
 [ext_resource type="Texture2D" uid="uid://p2yerrtjjfkl" path="res://icon.svg" id="1_vo30p"]
@@ -14,7 +14,16 @@ shadow_offset = Vector2(3.105, 3.195)
 [sub_resource type="LabelSettings" id="LabelSettings_hamk1"]
 font_size = 42
 
-[node name="Hud" type="Control"]
+[sub_resource type="LabelSettings" id="LabelSettings_yabhi"]
+font_size = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rng6o"]
+bg_color = Color(0.286275, 0.239216, 0.121569, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_75tiq"]
+bg_color = Color(0.286275, 0.733333, 0.121569, 1)
+
+[node name="Hud" type="Control" node_paths=PackedStringArray("summaryScreen", "timer", "timerLabel", "summaryCompletionTimeLabel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,8 +31,20 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_41fwl")
+summaryScreen = NodePath("Summary")
+timer = NodePath("Game/Timer")
+timerLabel = NodePath("Game/TimerLabel")
+summaryCompletionTimeLabel = NodePath("Summary/Label - Completion Time")
 
-[node name="TimerLabel" type="Label" parent="."]
+[node name="Game" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TimerLabel" type="Label" parent="Game"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -36,7 +57,7 @@ text = "00:00.00"
 label_settings = SubResource("LabelSettings_eibpl")
 horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="Game"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -53,7 +74,7 @@ texture = ExtResource("1_vo30p")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="TextureRect"]
+[node name="Label" type="Label" parent="Game/TextureRect"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -66,10 +87,10 @@ grow_vertical = 2
 text = "3"
 label_settings = SubResource("LabelSettings_hamk1")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="Game"]
 wait_time = 140.0
 
-[node name="GoalIndicator" type="TextureRect" parent="."]
+[node name="GoalIndicator" type="TextureRect" parent="Game"]
 layout_mode = 0
 offset_right = 66.0
 offset_bottom = 69.0
@@ -77,3 +98,53 @@ texture = ExtResource("3_x5ys7")
 expand_mode = 1
 stretch_mode = 4
 script = ExtResource("4_7t4iu")
+
+[node name="Summary" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Summary"]
+layout_mode = 0
+offset_left = 281.0
+offset_top = 207.0
+offset_right = 491.0
+offset_bottom = 245.0
+text = "Completion time:"
+label_settings = SubResource("LabelSettings_yabhi")
+
+[node name="Label - Completion Time" type="Label" parent="Summary"]
+layout_mode = 0
+offset_left = 644.0
+offset_top = 207.0
+offset_right = 854.0
+offset_bottom = 245.0
+text = "00:00"
+label_settings = SubResource("LabelSettings_yabhi")
+horizontal_alignment = 2
+
+[node name="BtnRetry" type="Button" parent="Summary"]
+layout_mode = 0
+offset_left = 421.0
+offset_top = 359.0
+offset_right = 577.0
+offset_bottom = 423.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_rng6o")
+text = "RETRY"
+
+[node name="BtnContinue" type="Button" parent="Summary"]
+layout_mode = 0
+offset_left = 623.0
+offset_top = 359.0
+offset_right = 779.0
+offset_bottom = 423.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_75tiq")
+text = "CONTINUE"
+
+[connection signal="pressed" from="Summary/BtnRetry" to="." method="OnBtnRetryPressed"]
+[connection signal="pressed" from="Summary/BtnContinue" to="." method="OnBtnContinuePressed"]

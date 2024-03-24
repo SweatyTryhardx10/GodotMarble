@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://c30crp15bwp25"]
+
+[ext_resource type="Script" path="res://Scenes/Levels/Goal.cs" id="1_2sl8q"]
+[ext_resource type="Material" uid="uid://grjijbhlfp5j" path="res://Materials/transparent_red.tres" id="2_rs3qs"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6wsvi"]
+size = Vector3(6.0271, 3.35962, 0.623291)
+
+[sub_resource type="BoxMesh" id="BoxMesh_q6inv"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_xg717"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8tnqj"]
+
+[node name="Goal" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.6302, -18.9556, 29.1345)
+script = ExtResource("1_2sl8q")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_6wsvi")
+
+[node name="Mesh (Transparent)" type="MeshInstance3D" parent="Area3D"]
+transform = Transform3D(6.0271, 0, 0, 0, 3.35962, 0, 0, 0, 0.623291, 0, 0, 0)
+material_override = ExtResource("2_rs3qs")
+mesh = SubResource("BoxMesh_q6inv")
+
+[node name="Pillar" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 3.44995, 0, 0, 0, 1, -3.32762, 0, 0)
+mesh = SubResource("BoxMesh_xg717")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Pillar"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pillar/StaticBody3D"]
+shape = SubResource("BoxShape3D_8tnqj")
+
+[node name="Pillar2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 3.44995, 0, 0, 0, 1, 3.328, 0, 0)
+mesh = SubResource("BoxMesh_xg717")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Pillar2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pillar2/StaticBody3D"]
+shape = SubResource("BoxShape3D_8tnqj")
+
+[connection signal="body_entered" from="Area3D" to="." method="OnArea3DBodyEntered"]

@@ -1,15 +1,21 @@
-[gd_scene load_steps=20 format=3 uid="uid://du7lxxhjet31"]
+[gd_scene load_steps=26 format=3 uid="uid://du7lxxhjet31"]
 
-[ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_yellow.tres" id="1_31mg4"]
+[ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_green1.tres" id="1_31mg4"]
+[ext_resource type="Script" path="res://Scripts/LevelManager.cs" id="1_frcld"]
 [ext_resource type="Texture2D" uid="uid://dkbb15e8mv6dk" path="res://Textures/gridbox-prototype/prototype_512x512_purple.png" id="4_30p28"]
 [ext_resource type="Texture2D" uid="uid://c4siiq1mrargy" path="res://Textures/gridbox-prototype/prototype_512x512_grey2.png" id="5_fs7d5"]
 [ext_resource type="Texture2D" uid="uid://dy88vrrt23aru" path="res://Textures/gridbox-prototype/prototype_512x512_orange.png" id="5_p6f6r"]
-[ext_resource type="PackedScene" path="res://Prefabs/spawn.tscn" id="6_j1j4p"]
+[ext_resource type="PackedScene" uid="uid://ngddmglqy453" path="res://Prefabs/spawn.tscn" id="6_j1j4p"]
+[ext_resource type="PackedScene" uid="uid://c30crp15bwp25" path="res://Prefabs/goal.tscn" id="7_em5wy"]
+[ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_blue3.tres" id="8_iowuq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uib2h"]
+size = Vector3(7.06176, 1, 17.2115)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5qoso"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qeem6"]
 size = Vector3(7.06176, 1, 8.99707)
-
-[sub_resource type="BoxMesh" id="BoxMesh_5qoso"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pxmwk"]
 size = Vector3(7.062, 1, 0.5)
@@ -52,7 +58,12 @@ data = PackedVector3Array(-0.049, 0, -0.4976, 0, 0.0488, -0.5048, 0, 0, -0.5, -0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oq1co"]
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_xe0b0"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_gvj7x"]
+
 [node name="Level01" type="Node3D"]
+script = ExtResource("1_frcld")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4.18817, 0)
@@ -76,7 +87,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.50192, 0, 0)
 freeze = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Box (RB)"]
-shape = SubResource("BoxShape3D_qeem6")
+shape = SubResource("BoxShape3D_uib2h")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Box (RB)"]
 transform = Transform3D(7.06176, 0, 0, 0, 1, 0, 0, 0, 17.2115, 0, 0, 0)
@@ -156,3 +167,15 @@ shape = SubResource("BoxShape3D_oq1co")
 
 [node name="Spawn" parent="." instance=ExtResource("6_j1j4p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.19347, 0)
+
+[node name="Goal" parent="." instance=ExtResource("7_em5wy")]
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(11.9243, 0, 0, 0, 13.1584, 0, 0, 0, 11.9243, 9.75658, -5.74052, 7.96473)
+material_override = ExtResource("8_iowuq")
+mesh = SubResource("CylinderMesh_xe0b0")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D3/StaticBody3D"]
+shape = SubResource("CylinderShape3D_gvj7x")
