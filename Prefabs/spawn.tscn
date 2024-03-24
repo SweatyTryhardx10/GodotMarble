@@ -1,8 +1,8 @@
 [gd_scene load_steps=3 format=3 uid="uid://ngddmglqy453"]
 
 [ext_resource type="Script" path="res://Scripts/Spawn.cs" id="1_u3p6q"]
-[ext_resource type="PackedScene" uid="uid://b881ihonj4cd8" path="res://Prefabs/player.tscn" id="2_dh5wk"]
+[ext_resource type="PackedScene" uid="uid://b881ihonj4cd8" path="res://Prefabs/player.tscn" id="2_nqebo"]
 
 [node name="Spawn" type="Node3D"]
 script = ExtResource("1_u3p6q")
-playerPrefab = ExtResource("2_dh5wk")
+playerPrefab = ExtResource("2_nqebo")
