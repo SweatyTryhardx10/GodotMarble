@@ -1,14 +1,20 @@
-[gd_scene load_steps=17 format=3 uid="uid://b881ihonj4cd8"]
+[gd_scene load_steps=24 format=3 uid="uid://b881ihonj4cd8"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerController.cs" id="1_5s1ht"]
 [ext_resource type="PackedScene" uid="uid://01yr66718b6v" path="res://Prefabs/chase_cam.tscn" id="2_2viy4"]
 [ext_resource type="Texture2D" uid="uid://p2yerrtjjfkl" path="res://icon.svg" id="2_yxxwr"]
 [ext_resource type="AudioStream" uid="uid://vc8mmnuiv1wd" path="res://Sounds/explosion1.wav" id="3_ynnj1"]
+[ext_resource type="Texture2D" uid="uid://ber241nnhqp75" path="res://Textures/Asphalt/PatchedAsphalt_AO.png" id="4_6edhv"]
 [ext_resource type="AudioStream" uid="uid://ccmdk5mjo7vil" path="res://Sounds/explosion2.wav" id="4_yxv1t"]
 [ext_resource type="AudioStream" uid="uid://bxyx7h34sorw8" path="res://Sounds/explosion3.wav" id="5_alfkk"]
+[ext_resource type="Texture2D" uid="uid://dye8qjhmbod6f" path="res://Textures/Asphalt/PatchedAsphalt_Displacement.tga" id="5_vkech"]
+[ext_resource type="Texture2D" uid="uid://brj6fu8tgtywd" path="res://Textures/Asphalt/PatchedAsphalt_Metalness.png" id="6_oe3vl"]
+[ext_resource type="Texture2D" uid="uid://dlbhbp8lcigq" path="res://Textures/Asphalt/PatchedAsphalt_Normal.png" id="7_1m2d8"]
 [ext_resource type="AudioStream" uid="uid://bmbc1c0kkqv6y" path="res://Sounds/jump1.wav" id="7_324x4"]
 [ext_resource type="AudioStream" uid="uid://cfti2c5dufkht" path="res://Sounds/jump2.wav" id="8_0ksb4"]
+[ext_resource type="Texture2D" uid="uid://bn0338abi7sjn" path="res://Textures/Asphalt/PatchedAsphalt_Roughness.png" id="8_t6m1l"]
 [ext_resource type="AudioStream" uid="uid://c485w4sei0gm5" path="res://Sounds/jump3.wav" id="9_s4cq8"]
+[ext_resource type="AudioStream" uid="uid://4mj18ep768yi" path="res://Sounds/525096__jomse__plasticimpacta7.wav" id="10_vi4sv"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vdoeu"]
 
@@ -16,6 +22,21 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7k4j7"]
 albedo_texture = ExtResource("2_yxxwr")
+metallic = 1.0
+metallic_texture = ExtResource("6_oe3vl")
+roughness_texture = ExtResource("8_t6m1l")
+normal_enabled = true
+normal_texture = ExtResource("7_1m2d8")
+rim_enabled = true
+rim = 0.25
+clearcoat = 0.3
+clearcoat_roughness = 1.0
+ao_texture = ExtResource("4_6edhv")
+heightmap_enabled = true
+heightmap_texture = ExtResource("5_vkech")
+subsurf_scatter_strength = 0.82
+subsurf_scatter_skin_mode = true
+backlight = Color(0.878431, 0.780392, 0, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_ccs6e"]
 material = SubResource("StandardMaterial3D_7k4j7")
@@ -43,7 +64,13 @@ stream_1/weight = 1.0
 stream_2/stream = ExtResource("9_s4cq8")
 stream_2/weight = 1.0
 
-[node name="Player" type="RigidBody3D" node_paths=PackedStringArray("area3D", "groundSlamSound", "jumpSound")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_52c1f"]
+random_pitch = 1.3
+streams_count = 1
+stream_0/stream = ExtResource("10_vi4sv")
+stream_0/weight = 1.0
+
+[node name="Player" type="RigidBody3D" node_paths=PackedStringArray("area3D", "groundSlamSound", "jumpSound", "landSound")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00389004, 2.19659, -2.0347)
 physics_material_override = SubResource("PhysicsMaterial_vdoeu")
 continuous_cd = true
@@ -54,6 +81,7 @@ SlamVelocity = 100.0
 area3D = NodePath("Area3D")
 groundSlamSound = NodePath("GroundSlam")
 jumpSound = NodePath("Jump")
+landSound = NodePath("Land")
 cameraPrefab = ExtResource("2_2viy4")
 
 [node name="MarbleCollider" type="CollisionShape3D" parent="."]
@@ -71,6 +99,15 @@ shape = SubResource("SphereShape3D_ivhby")
 
 [node name="GroundSlam" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamRandomizer_6f615")
+volume_db = -6.957
+bus = &"SFX"
 
 [node name="Jump" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamRandomizer_oq7of")
+bus = &"SFX"
+
+[node name="Land" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_52c1f")
+unit_size = 100.0
+max_db = 0.0
+bus = &"SFX"

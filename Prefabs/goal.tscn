@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://c30crp15bwp25"]
+[gd_scene load_steps=12 format=3 uid="uid://c30crp15bwp25"]
 
-[ext_resource type="Script" path="res://Goal.cs" id="1_2sl8q"]
+[ext_resource type="Script" path="res://Scripts/Goal.cs" id="1_3wr42"]
 [ext_resource type="Material" uid="uid://grjijbhlfp5j" path="res://Materials/transparent_red.tres" id="2_rs3qs"]
+[ext_resource type="Texture2D" uid="uid://p2yerrtjjfkl" path="res://icon.svg" id="3_wsvk6"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6wsvi"]
 size = Vector3(6.0271, 3.35962, 0.623291)
@@ -12,9 +13,29 @@ size = Vector3(6.0271, 3.35962, 0.623291)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8tnqj"]
 
-[node name="Goal" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.6302, -18.9556, 29.1345)
-script = ExtResource("1_2sl8q")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0woqj"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("3_wsvk6")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_ljn5g"]
+material = SubResource("StandardMaterial3D_0woqj")
+size = Vector2(0.5, 0.5)
+
+[sub_resource type="Curve" id="Curve_226lc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_y4vr1"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="Goal" type="Node3D" node_paths=PackedStringArray("particles")]
+script = ExtResource("1_3wr42")
+particles = NodePath("Particles")
 
 [node name="Area3D" type="Area3D" parent="."]
 
@@ -43,5 +64,19 @@ mesh = SubResource("BoxMesh_xg717")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pillar2/StaticBody3D"]
 shape = SubResource("BoxShape3D_8tnqj")
+
+[node name="Particles" type="CPUParticles3D" parent="."]
+emitting = false
+amount = 50
+explosiveness = 1.0
+draw_order = 2
+mesh = SubResource("QuadMesh_ljn5g")
+spread = 180.0
+gravity = Vector3(0, -39.2, 0)
+initial_velocity_min = 10.1
+initial_velocity_max = 30.3
+scale_amount_min = 0.0
+scale_amount_curve = SubResource("Curve_226lc")
+color_ramp = SubResource("Gradient_y4vr1")
 
 [connection signal="body_entered" from="Area3D" to="." method="OnArea3DBodyEntered"]

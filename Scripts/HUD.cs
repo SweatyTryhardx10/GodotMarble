@@ -3,9 +3,8 @@ using System;
 
 public partial class HUD : Control
 {
-	private static HUD Instance;
-	public static bool exists;
-
+	public static HUD Instance { get; private set; }
+	
 	[Export]
 	private Control summaryScreen;
 	[Export]
@@ -16,16 +15,12 @@ public partial class HUD : Control
 	[Export]
 	private Label summaryCompletionTimeLabel;
 
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+    public override void _EnterTree() => Instance = this;
+    public override void _ExitTree() => Instance = null;
+
+    // Called when the node enters the scene tree for the first time.
+    public override void _Ready()
 	{
-		Instance = this;
-
-		if (!exists)
-			exists = true;
-		else
-			QueueFree();
-
 		timer.Start();
 	}
 
@@ -46,27 +41,31 @@ public partial class HUD : Control
 
 	public static void ShowSummaryScreen()
 	{
-		if (Instance == null)
+		if (!IsInstanceValid(Instance))
 			return;
-
+			
 		Instance.summaryCompletionTimeLabel.Text = Instance.timerLabel.Text;
 
 		Instance.summaryScreen.Visible = true;
+
+		// Change mouse mode
+		Input.MouseMode = Input.MouseModeEnum.Visible;
 	}
 
-	public static void SetTimer(float seconds)
+	public static void SetGameTimer(float seconds)
 	{
-		if (Instance == null)
+		if (!IsInstanceValid(Instance))
 			return;
-
+		
 		Instance.timerLabel.Text = SecondsToTimerFormat(seconds);
 	}
 
 	private void OnBtnRetryPressed()
 	{
-		Instance.summaryScreen.Visible = false;
+		summaryScreen.Visible = false;
+		Input.MouseMode = Input.MouseModeEnum.Captured;
 
-		Spawn.Instance.SpawnPlayer();
+		Spawn.SpawnPlayer();
 	}
 
 	private void OnBtnContinuePressed()
@@ -74,14 +73,19 @@ public partial class HUD : Control
 		// Unload all scenes
 		foreach (var c in GetTree().Root.GetChildren())
 		{
-			c.QueueFree();
+			if (c.Name != "BackgroundMusic")	// TODO: This is very spaghetti italiano!
+				c.QueueFree();
 		}
-		
+
 		// Load main menu scene from resources
 		var sceneFile = ResourceLoader.Load<PackedScene>("res://Scenes/MainMenu.tscn");
 		var scene = sceneFile.Instantiate();
-		
+
 		// Add main menu to the node tree
 		GetTree().Root.AddChild(scene);
+		
+
+		// Change mouse mode
+		Input.MouseMode = Input.MouseModeEnum.Visible;
 	}
 }

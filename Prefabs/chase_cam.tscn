@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://Scripts/ChaseCamera.cs" id="1_ohcfd"]
 
-[node name="Chase Cam" type="Camera3D" node_paths=PackedStringArray("target")]
+[node name="Chase Cam" type="Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.94967, 3.84242, 0)
 script = ExtResource("1_ohcfd")
-target = NodePath("")
 hightOffset = 2.0
+smoothing = 5.0

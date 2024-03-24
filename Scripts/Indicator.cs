@@ -13,7 +13,8 @@ public partial class Indicator : TextureRect
 
 	private void TryGetTarget()
 	{
-		followTarget = Goal.Instance;
+		if (IsInstanceValid(Goal.Instance))
+			followTarget = Goal.Instance;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

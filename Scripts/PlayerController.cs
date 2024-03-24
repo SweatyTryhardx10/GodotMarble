@@ -4,33 +4,37 @@ public partial class PlayerController : RigidBody3D
 {
 	public static PlayerController Instance { get; private set; }
 
-	public PlayerController()
-	{
-		Instance = this;
-	}
+	public override void _EnterTree() => Instance = this;
+	public override void _ExitTree() => Instance = null;
 
-    public override void _Ready()
-    {
-        base._Ready();
-		
+	public override void _Ready()
+	{
+		base._Ready();
+
 		// Instantiate and configure camera on spawn
 		var cam = cameraPrefab.Instantiate<ChaseCamera>();
 		cam.target = this;
 		GetParent().AddChild(cam);
-    }
+		
+		// Collision callback
+		this.BodyEntered += (Node n) => {
+			landSound.Play();
+		};
+	}
 
-    [Export] private float Speed = 5.0f;
+	[Export] private float Speed = 5.0f;
 	[Export] private float JumpVelocity = 4.5f;
 	[Export] private float SlamVelocity = 4.5f;
 	[Export] private float SlamForce = 500f;
 	[Export] private Area3D area3D;
 	[Export] private AudioStreamPlayer3D groundSlamSound;
 	[Export] private AudioStreamPlayer3D jumpSound;
+	[Export] private AudioStreamPlayer3D landSound;
 	[Export] private PackedScene cameraPrefab;
 	private bool isSlamming = false;
 	public override void _PhysicsProcess(double delta)
-	{
-		Vector2 inputDir = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
+	{	
+		Vector2 inputDir = Input.GetVector("MoveLeft", "MoveRight", "MoveUp", "MoveDown");
 		var cameraBasis = GetViewport().GetCamera3D().Transform.Basis;
 		Vector3 direction = inputDir.X * cameraBasis.X.Normalized() + inputDir.Y * cameraBasis.Z.Normalized();
 		direction.Y = 0;
@@ -76,5 +80,18 @@ public partial class PlayerController : RigidBody3D
 		{
 			isSlamming = true;
 		}
+	}
+
+	public static void Respawn(Vector3 position)
+	{
+		if (!IsInstanceValid(Instance))
+			return;
+			
+		// Reset player's position to the spawn position
+		Instance.GlobalPosition = position;
+		Instance.LinearVelocity = Vector3.Zero;
+		Instance.AngularVelocity = Vector3.Zero;
+		
+		GD.Print("Player has been respawned!");
 	}
 }
