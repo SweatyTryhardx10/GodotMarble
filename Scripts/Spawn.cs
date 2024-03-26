@@ -3,16 +3,22 @@ using System;
 
 public partial class Spawn : Node3D
 {
-	public static Spawn Instance { get; private set; }
+	[Signal]
+	public delegate void OnSpawnEventHandler(Vector3 position);
+
+	private static Spawn Instance { get; set; }
 	[Export]
 	private PackedScene playerPrefab;
+
+	public override void _EnterTree()
+	{
+		base._EnterTree();
+		Instance = this;
+	}
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		Instance = this;
-		
-		// SpawnPlayer();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -22,21 +28,26 @@ public partial class Spawn : Node3D
 			SpawnPlayer();
 	}
 
-	public void SpawnPlayer()
+	public static void SpawnPlayer()
 	{
-		PlayerController player = PlayerController.Instance;
-		if (player == null)
+		if (!IsInstanceValid(Instance))
+			return;
+
+		if (!IsInstanceValid(PlayerController.Instance))
 		{
-			player = playerPrefab.Instantiate<PlayerController>();
-
-			GetTree().Root.AddChild(player);
+			PlayerController player = Instance.playerPrefab.Instantiate<PlayerController>();
+			player.TreeEntered += PositionPlayer;	// Position player after they have entered the tree
+			Instance.GetTree().Root.CallDeferred(MethodName.AddChild, player);  // For some reason, this method call must be 'deferred' otherwise
+																				// the child is added before the tree is built
 		}
+		else
+		{
+			PositionPlayer();
+		}
+	}
 
-		// Reset player's position to the spawn position
-		PlayerController.Instance.GlobalPosition = Position;
-		PlayerController.Instance.LinearVelocity = Vector3.Zero;
-		PlayerController.Instance.AngularVelocity = Vector3.Zero;
-		
-		GD.Print("Player has been respawned!");
+	private static void PositionPlayer()
+	{
+		PlayerController.Respawn(Instance.GlobalPosition);
 	}
 }

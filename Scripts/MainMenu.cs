@@ -8,12 +8,12 @@ public partial class MainMenu : Control
 	[Export] private PackedScene[] levels;
 
 	[Export] private Control titlePanel;
-	
+
 	[Export] private Control levelSelectPanel;
 	[Export] private Control levelButtonGroup;
 	[Export] private PackedScene levelButtonPrefab;
 	[Export] private PackedScene hudPrefab;
-	
+
 	[Export] private Control optionsPanel;
 
 	// Called when the node enters the scene tree for the first time.
@@ -67,7 +67,7 @@ public partial class MainMenu : Control
 
 		// Add HUD to the game (the root node)
 		// ...if it doesn't exist
-		if (!HUD.exists)
+		if (!IsInstanceValid(HUD.Instance))
 		{
 			var hud = hudPrefab.Instantiate();
 			GetTree().Root.AddChild(hud);
@@ -92,5 +92,12 @@ public partial class MainMenu : Control
 	private void OnBtnExitPressed()
 	{
 		GetTree().Quit();
+	}
+
+	private void OnBtnBackPressed()
+	{
+		optionsPanel.Visible = false;
+		titlePanel.Visible = true;
+		levelSelectPanel.Visible = false;
 	}
 }

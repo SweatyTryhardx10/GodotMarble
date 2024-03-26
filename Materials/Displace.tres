@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://ctt61l6xpe7hg"]
+
+[ext_resource type="Shader" uid="uid://bx4btogx7mwo0" path="res://Shaders/DisplaceShader.tres" id="1_xrrkt"]
+[ext_resource type="Texture2D" uid="uid://p2yerrtjjfkl" path="res://icon.svg" id="2_bqret"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_xrrkt")
+shader_parameter/UV_Size = Vector2(200, 200)
+shader_parameter/AlbedoTexture = ExtResource("2_bqret")

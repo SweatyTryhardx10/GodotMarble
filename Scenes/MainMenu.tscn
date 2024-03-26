@@ -1,11 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://dclstik3gb257"]
+[gd_scene load_steps=10 format=3 uid="uid://dclstik3gb257"]
 
 [ext_resource type="Texture2D" uid="uid://p2yerrtjjfkl" path="res://icon.svg" id="1_mvofy"]
 [ext_resource type="Script" path="res://Scripts/MainMenu.cs" id="1_ngsuk"]
-[ext_resource type="PackedScene" uid="uid://jw2f5x6lx0v6" path="res://Scenes/Nicklas.tscn" id="2_7hm6t"]
-[ext_resource type="PackedScene" path="res://Scenes/Marty.tscn" id="3_ddjsu"]
 [ext_resource type="PackedScene" uid="uid://x2jkh8gddge6" path="res://Scenes/UI/BtnLevel.tscn" id="3_q3egg"]
-[ext_resource type="PackedScene" uid="uid://cervu86sb3c7t" path="res://Scenes/TestScene.tscn" id="4_c7j7p"]
+[ext_resource type="PackedScene" uid="uid://o6mq3phmufrm" path="res://Scenes/Levels/Level_02.tscn" id="3_tuev7"]
+[ext_resource type="PackedScene" uid="uid://d2w71o2tt8tlg" path="res://Scenes/Levels/Level_03.tscn" id="4_p6215"]
 [ext_resource type="PackedScene" uid="uid://du7lxxhjet31" path="res://Scenes/Levels/Level_01.tscn" id="5_he7c6"]
 [ext_resource type="PackedScene" uid="uid://c6r2fwt85ovpb" path="res://Scenes/HUD.tscn" id="7_u1rs8"]
 [ext_resource type="Script" path="res://Scenes/VolumeSlider.cs" id="9_prsiu"]
@@ -21,7 +20,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ngsuk")
-levels = Array[PackedScene]([ExtResource("2_7hm6t"), ExtResource("3_ddjsu"), ExtResource("4_c7j7p"), ExtResource("5_he7c6")])
+levels = Array[PackedScene]([ExtResource("5_he7c6"), ExtResource("3_tuev7"), ExtResource("4_p6215")])
 titlePanel = NodePath("Title Screen")
 levelSelectPanel = NodePath("Level Select")
 levelButtonGroup = NodePath("Level Select/GridContainer")
@@ -148,6 +147,21 @@ grow_horizontal = 2
 grow_vertical = 0
 columns = 5
 
+[node name="BtnBack" type="Button" parent="Level Select"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -190.0
+offset_top = -93.0
+offset_right = -51.0
+offset_bottom = -41.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Back"
+
 [node name="Options" type="Control" parent="."]
 visible = false
 layout_mode = 1
@@ -156,6 +170,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Label" type="Label" parent="Options"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 130.0
+grow_horizontal = 2
+text = "OPTIONS"
+label_settings = SubResource("LabelSettings_giaoo")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Container" type="Control" parent="Options"]
 layout_mode = 1
@@ -199,10 +224,95 @@ offset_top = -31.0
 offset_right = 174.5
 grow_horizontal = 2
 grow_vertical = 0
-value = 70.0
+value = 80.0
 script = ExtResource("9_prsiu")
+
+[node name="Slider (and text)2" type="Control" parent="Options/Container"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 67.0
+offset_bottom = 125.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="Options/Container/Slider (and text)2"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 30.0
+grow_horizontal = 2
+text = "Music Volume"
+horizontal_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="Options/Container/Slider (and text)2"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -174.5
+offset_top = -31.0
+offset_right = 174.5
+grow_horizontal = 2
+grow_vertical = 0
+value = 100.0
+script = ExtResource("9_prsiu")
+busName = "Music"
+
+[node name="Slider (and text)3" type="Control" parent="Options/Container"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 136.835
+offset_bottom = 194.835
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="Options/Container/Slider (and text)3"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 30.0
+grow_horizontal = 2
+text = "Sound Effects Volume"
+horizontal_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="Options/Container/Slider (and text)3"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -174.5
+offset_top = -31.0
+offset_right = 174.5
+grow_horizontal = 2
+grow_vertical = 0
+value = 100.0
+script = ExtResource("9_prsiu")
+busName = "SFX"
+
+[node name="BtnBack" type="Button" parent="Options"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -69.5
+offset_top = -179.0
+offset_right = 69.5
+offset_bottom = -127.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Back"
 
 [connection signal="pressed" from="Title Screen/BtnPlay" to="." method="OnBtnPlayPressed"]
 [connection signal="pressed" from="Title Screen/BtnOptions" to="." method="OnBtnOptionsPressed"]
 [connection signal="pressed" from="Title Screen/BtnExit" to="." method="OnBtnExitPressed"]
+[connection signal="pressed" from="Level Select/BtnBack" to="." method="OnBtnBackPressed"]
 [connection signal="value_changed" from="Options/Container/Slider (and text)/HSlider" to="Options/Container/Slider (and text)/HSlider" method="OnValueChanged"]
+[connection signal="value_changed" from="Options/Container/Slider (and text)2/HSlider" to="Options/Container/Slider (and text)2/HSlider" method="OnValueChanged"]
+[connection signal="value_changed" from="Options/Container/Slider (and text)3/HSlider" to="Options/Container/Slider (and text)3/HSlider" method="OnValueChanged"]
+[connection signal="pressed" from="Options/BtnBack" to="." method="OnBtnBackPressed"]

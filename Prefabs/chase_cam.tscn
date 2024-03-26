@@ -1,9 +1,63 @@
-[gd_scene load_steps=2 format=3 uid="uid://01yr66718b6v"]
+[gd_scene load_steps=8 format=3 uid="uid://01yr66718b6v"]
 
 [ext_resource type="Script" path="res://Scripts/ChaseCamera.cs" id="1_ohcfd"]
+[ext_resource type="PackedScene" uid="uid://fn4ue284pmgv" path="res://motion_blur/motion_blur.tscn" id="2_28yqe"]
+[ext_resource type="Shader" path="res://motion_blur/moblur_shader.gdshader" id="3_bxu06"]
 
-[node name="Chase Cam" type="Camera3D" node_paths=PackedStringArray("target")]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0rv76"]
+sky_top_color = Color(0.368627, 0.498039, 0.121569, 1)
+sky_horizon_color = Color(0.735864, 0.82377, 0.846259, 1)
+sky_energy_multiplier = 1.25
+ground_bottom_color = Color(0.109804, 0.0901961, 0.0666667, 1)
+ground_horizon_color = Color(0.462745, 0.572549, 0.419608, 1)
+
+[sub_resource type="Sky" id="Sky_5p8jm"]
+sky_material = SubResource("ProceduralSkyMaterial_0rv76")
+
+[sub_resource type="Environment" id="Environment_fwvki"]
+background_mode = 2
+sky = SubResource("Sky_5p8jm")
+tonemap_mode = 2
+ssr_enabled = true
+ssr_fade_in = 0.149999
+ssao_enabled = true
+ssao_radius = 2.0
+ssao_intensity = 4.0
+ssao_ao_channel_affect = 0.5
+ssil_enabled = true
+glow_enabled = true
+fog_light_color = Color(0.729412, 0.741176, 0.772549, 1)
+fog_density = 0.095
+fog_aerial_perspective = 1.0
+fog_sky_affect = 0.0
+fog_height = -5.0
+fog_height_density = 0.0269
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.035
+volumetric_fog_albedo = Color(0.235294, 0.376471, 0.305882, 1)
+volumetric_fog_ambient_inject = 0.5
+volumetric_fog_sky_affect = 0.5
+adjustment_enabled = true
+adjustment_contrast = 1.1
+adjustment_saturation = 1.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u6u8h"]
+render_priority = -1
+shader = ExtResource("3_bxu06")
+shader_parameter/linear_velocity = Vector3(0, 0, 0)
+shader_parameter/angular_velocity = Vector3(0, 0, 0)
+shader_parameter/iteration_count = 15
+shader_parameter/intensity = 0.291
+shader_parameter/startRadius = 0.1
+
+[node name="Chase Cam" type="Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.94967, 3.84242, 0)
+environment = SubResource("Environment_fwvki")
 script = ExtResource("1_ohcfd")
-target = NodePath("")
-hightOffset = 2.0
+heightOffset = 1.0
+smoothing = 8.0
+mouseSensitivity = 1.0
+
+[node name="motion_blur" parent="." instance=ExtResource("2_28yqe")]
+visible = false
+surface_material_override/0 = SubResource("ShaderMaterial_u6u8h")
