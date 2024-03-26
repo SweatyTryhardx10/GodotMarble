@@ -15,11 +15,8 @@ public partial class PlayerController : RigidBody3D
 		var cam = cameraPrefab.Instantiate<ChaseCamera>();
 		cam.target = this;
 		GetParent().AddChild(cam);
-		
+
 		// Collision callback
-		this.BodyEntered += (Node n) => {
-			landSound.Play();
-		};
 	}
 
 	[Export] private float Speed = 5.0f;
@@ -32,8 +29,11 @@ public partial class PlayerController : RigidBody3D
 	[Export] private AudioStreamPlayer3D landSound;
 	[Export] private PackedScene cameraPrefab;
 	private bool isSlamming = false;
+	
+	private Vector3 oldVel;
+	
 	public override void _PhysicsProcess(double delta)
-	{	
+	{
 		Vector2 inputDir = Input.GetVector("MoveLeft", "MoveRight", "MoveUp", "MoveDown");
 		var cameraBasis = GetViewport().GetCamera3D().Transform.Basis;
 		Vector3 direction = inputDir.X * cameraBasis.X.Normalized() + inputDir.Y * cameraBasis.Z.Normalized();
@@ -69,6 +69,22 @@ public partial class PlayerController : RigidBody3D
 		}
 	}
 
+	public override void _IntegrateForces(PhysicsDirectBodyState3D state)
+	{
+		base._IntegrateForces(state);
+
+		if (state.GetContactCount() > 0)
+		{
+			Vector3 normal = state.GetContactLocalNormal(0);
+
+			// Play land sound of the "normal-velocity" is above a threshold
+			if (state.LinearVelocity.Project(normal).Length() > 1f && state.LinearVelocity.Normalized().Dot(normal) < 0.5f)
+				landSound.Play();
+		}
+		
+		oldVel = state.LinearVelocity;
+	}
+
 	public override void _Process(double delta)
 	{
 		if (Input.IsActionJustPressed("ui_accept") && GetContactCount() > 0)
@@ -86,12 +102,12 @@ public partial class PlayerController : RigidBody3D
 	{
 		if (!IsInstanceValid(Instance))
 			return;
-			
+
 		// Reset player's position to the spawn position
 		Instance.GlobalPosition = position;
 		Instance.LinearVelocity = Vector3.Zero;
 		Instance.AngularVelocity = Vector3.Zero;
-		
+
 		GD.Print("Player has been respawned!");
 	}
 }

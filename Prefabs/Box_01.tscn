@@ -1,0 +1,88 @@
+[gd_scene load_steps=7 format=3 uid="uid://tfy2lfjm1gsb"]
+
+[ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_cyan.tres" id="1_w6lmr"]
+[ext_resource type="Texture2D" uid="uid://b1mceqyv2wufm" path="res://Textures/gridbox-prototype/prototype_512x512_brown.png" id="2_kbtkp"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_gkham"]
+material = ExtResource("1_w6lmr")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ksuy"]
+albedo_texture = ExtResource("2_kbtkp")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_iwfd6"]
+material = SubResource("StandardMaterial3D_6ksuy")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d6hfg"]
+
+[node name="Box_01 (RB)" type="RigidBody3D"]
+
+[node name="Mesh" type="Node3D" parent="."]
+
+[node name="Box (Mesh)" type="MeshInstance3D" parent="Mesh"]
+mesh = SubResource("BoxMesh_gkham")
+skeleton = NodePath("../..")
+
+[node name="Box (Mesh)2" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.460188, 0.465084)
+mesh = SubResource("BoxMesh_iwfd6")
+skeleton = NodePath("../..")
+
+[node name="Box (Mesh)3" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.46, -0.465)
+mesh = SubResource("BoxMesh_iwfd6")
+skeleton = NodePath("../..")
+
+[node name="Box (Mesh)4" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, -0.46, 0.465084)
+mesh = SubResource("BoxMesh_iwfd6")
+skeleton = NodePath("../..")
+
+[node name="Box (Mesh)5" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, -0.46, -0.465)
+mesh = SubResource("BoxMesh_iwfd6")
+skeleton = NodePath("../..")
+
+[node name="Box (Mesh)6" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(-4.43709e-08, 0.1, 0, -1.01509, -4.37114e-09, 0, 0, 0, 0.1, 0.460141, 4.69033e-05, 0.465084)
+mesh = SubResource("BoxMesh_iwfd6")
+skeleton = NodePath("../..")
+
+[node name="Box (Mesh)7" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(-4.43709e-08, 0.1, 0, -1.01509, -4.37114e-09, 0, 0, 0, 0.1, 0.459953, 4.69034e-05, -0.465)
+mesh = SubResource("BoxMesh_iwfd6")
+skeleton = NodePath("../..")
+
+[node name="Box (Mesh)8" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(-4.43709e-08, 0.1, 0, -1.01509, -4.37114e-09, 0, 0, 0, 0.1, -0.460047, 4.69442e-05, 0.465084)
+mesh = SubResource("BoxMesh_iwfd6")
+skeleton = NodePath("../..")
+
+[node name="Box (Mesh)9" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(-4.43709e-08, 0.1, 0, -1.01509, -4.37114e-09, 0, 0, 0, 0.1, -0.460047, 4.69442e-05, -0.465)
+mesh = SubResource("BoxMesh_iwfd6")
+skeleton = NodePath("../..")
+
+[node name="Box (Mesh)10" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(-4.43709e-08, 0.1, 0, 4.43709e-08, 5.4634e-16, 0.0999999, 1.01509, 4.37114e-09, -4.37114e-09, 0.460141, 0.465089, 4.20214e-05)
+mesh = SubResource("BoxMesh_iwfd6")
+skeleton = NodePath("../..")
+
+[node name="Box (Mesh)11" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(-4.43709e-08, 0.1, 0, 4.43709e-08, 5.4634e-16, 0.0999999, 1.01509, 4.37114e-09, -4.37114e-09, 0.459953, -0.464995, 4.2062e-05)
+mesh = SubResource("BoxMesh_iwfd6")
+skeleton = NodePath("../..")
+
+[node name="Box (Mesh)12" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(-4.43709e-08, 0.1, 0, 4.43709e-08, 5.4634e-16, 0.0999999, 1.01509, 4.37114e-09, -4.37114e-09, -0.460047, 0.465089, 4.19805e-05)
+mesh = SubResource("BoxMesh_iwfd6")
+skeleton = NodePath("../..")
+
+[node name="Box (Mesh)13" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(-4.43709e-08, 0.1, 0, 4.43709e-08, 5.4634e-16, 0.0999999, 1.01509, 4.37114e-09, -4.37114e-09, -0.460047, -0.464995, 4.20212e-05)
+mesh = SubResource("BoxMesh_iwfd6")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_d6hfg")

@@ -1,0 +1,126 @@
+[gd_scene load_steps=14 format=3 uid="uid://o6mq3phmufrm"]
+
+[ext_resource type="Script" path="res://Scripts/LevelManager.cs" id="1_qy2b1"]
+[ext_resource type="PackedScene" uid="uid://ngddmglqy453" path="res://Prefabs/spawn.tscn" id="3_5s221"]
+[ext_resource type="Texture2D" uid="uid://b1mceqyv2wufm" path="res://Textures/gridbox-prototype/prototype_512x512_brown.png" id="3_h3qle"]
+[ext_resource type="PackedScene" uid="uid://c30crp15bwp25" path="res://Prefabs/goal.tscn" id="4_7wtrw"]
+[ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_yellow.tres" id="4_ws223"]
+
+[sub_resource type="Curve3D" id="Curve3D_q27ab"]
+_data = {
+"points": PackedVector3Array(6.71091, 0.0516176, 0.247403, -6.71091, -0.0516176, -0.247403, 0, 6, 0, 4.70329, 4.26282, 1.71252, -4.70329, -4.26282, -1.71252, -13.6743, -2.50378, 1.79281, 13.6255, -0.0961227, 0.75088, -13.6255, 0.0961227, -0.75088, -34.4673, -10.7595, -3.5649, 10.2151, -1.5226, 0.216252, -10.2151, 1.5226, -0.216252, -59.8382, -10.1768, -0.889858, 18.2523, -9.12617, 0.393555, -18.2523, 9.12617, -0.393555, -91.413, 0.509958, -1.70691),
+"tilts": PackedFloat32Array(0, 0.706556, -0.294531, 0.515086, 0.343024)
+}
+point_count = 5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0sn4c"]
+albedo_texture = ExtResource("3_h3qle")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_ry10v"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7rkjr"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_vjh80"]
+material = ExtResource("4_ws223")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iugmb"]
+
+[sub_resource type="Curve3D" id="Curve3D_ooqfo"]
+_data = {
+"points": PackedVector3Array(14.727, 4.22585, 2.47955e-05, -14.727, -4.22585, -2.47955e-05, 0.0932159, -0.182013, 0.195581, 21.0949, -0.149609, 0, -21.0949, 0.149609, 0, -56.2253, -4.85669, 0.195557, 14.8641, 0.00170898, -16.9144, -14.8641, -0.00170898, 16.9144, -136.142, -5.1969, 12.6614, -2.26097, -0.0559082, -32.9457, 2.26097, 0.0559082, 32.9457, -151.518, -5.36658, 85.957, 0.439453, 0.12085, -48.3378, -0.439453, -0.12085, 48.3378, -142.423, -5.36658, 180.144),
+"tilts": PackedFloat32Array(0, -0.34181, -0.652789, -0.34246, 0)
+}
+point_count = 5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5fqu3"]
+albedo_texture = ExtResource("3_h3qle")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[node name="Level02" type="Node3D"]
+script = ExtResource("1_qy2b1")
+
+[node name="Terrain" type="Node3D" parent="."]
+
+[node name="Path3D" type="Path3D" parent="Terrain"]
+curve = SubResource("Curve3D_q27ab")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Terrain/Path3D"]
+use_collision = true
+polygon = PackedVector2Array(-2.89819, 0.174597, -3.17772, 0.00484124, 3.17516, -0.0110055, 2.79566, 0.159028, 2.24045, 0.123728, 1.71935, 0.0876909, 1.10112, 0.0550768, 0.374838, 0.0428873, -0.175239, 0.0430398, -0.723347, 0.0493495, -1.64907, 0.0802895, -2.35682, 0.117171)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 0.32
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+material = SubResource("StandardMaterial3D_0sn4c")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain"]
+transform = Transform3D(2.92306, 0, 0, 0, 1, 0, 0, 0, 6.44715, 1.34051, 5.68757, 0)
+mesh = SubResource("BoxMesh_ry10v")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Terrain/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/MeshInstance3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_7rkjr")
+
+[node name="Box (mesh)" type="MeshInstance3D" parent="Terrain"]
+transform = Transform3D(50.2982, 0.301196, 0, -3.7228, 4.06942, 0, 0, 0, 27.042, -37.8572, -15.0881, 0.00501251)
+mesh = SubResource("BoxMesh_vjh80")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Terrain/Box (mesh)"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Box (mesh)/StaticBody3D"]
+shape = SubResource("BoxShape3D_iugmb")
+
+[node name="Box (mesh)2" type="MeshInstance3D" parent="Terrain"]
+transform = Transform3D(47.8723, -1.28437, 0, 15.8749, 3.87315, 0, 0, 0, 55.158, -153.164, -15.82, 0.00501251)
+mesh = SubResource("BoxMesh_vjh80")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Terrain/Box (mesh)2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Box (mesh)2/StaticBody3D"]
+shape = SubResource("BoxShape3D_iugmb")
+
+[node name="Path3D2" type="Path3D" parent="Terrain"]
+curve = SubResource("Curve3D_ooqfo")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Terrain/Path3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -177.261, -22.7137, 0)
+use_collision = true
+polygon = PackedVector2Array(-18.8689, -0.601843, -17.791, 0.897747, 15.4051, 0.774607, 16.4869, -0.459499)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 2.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+material = SubResource("StandardMaterial3D_5fqu3")
+
+[node name="Lights" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4.18817, 0)
+light_color = Color(0.760784, 0.67451, 0.65098, 1)
+light_energy = 4.048
+shadow_enabled = true
+shadow_blur = 2.428
+
+[node name="Spawn" parent="." instance=ExtResource("3_5s221")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.23886, 8.35414, 0)
+
+[node name="Goal" parent="." instance=ExtResource("4_7wtrw")]
+transform = Transform3D(-0.996509, 0, -0.0834866, 0, 1, 0, 0.0834866, 0, -0.996509, -317.499, -25.6254, 177.396)

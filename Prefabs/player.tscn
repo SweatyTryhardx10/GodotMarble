@@ -17,6 +17,8 @@
 [ext_resource type="AudioStream" uid="uid://4mj18ep768yi" path="res://Sounds/525096__jomse__plasticimpacta7.wav" id="10_vi4sv"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vdoeu"]
+bounce = 0.3
+absorbent = true
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jq6ae"]
 
@@ -26,6 +28,7 @@ metallic = 1.0
 metallic_texture = ExtResource("6_oe3vl")
 roughness_texture = ExtResource("8_t6m1l")
 normal_enabled = true
+normal_scale = 2.0
 normal_texture = ExtResource("7_1m2d8")
 rim_enabled = true
 rim = 0.25
@@ -33,10 +36,13 @@ clearcoat = 0.3
 clearcoat_roughness = 1.0
 ao_texture = ExtResource("4_6edhv")
 heightmap_enabled = true
+heightmap_scale = 0.31
 heightmap_texture = ExtResource("5_vkech")
 subsurf_scatter_strength = 0.82
 subsurf_scatter_skin_mode = true
 backlight = Color(0.878431, 0.780392, 0, 1)
+uv1_scale = Vector3(2, 2, 2)
+grow_amount = -0.085
 
 [sub_resource type="SphereMesh" id="SphereMesh_ccs6e"]
 material = SubResource("StandardMaterial3D_7k4j7")
@@ -73,10 +79,12 @@ stream_0/weight = 1.0
 [node name="Player" type="RigidBody3D" node_paths=PackedStringArray("area3D", "groundSlamSound", "jumpSound", "landSound")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00389004, 2.19659, -2.0347)
 physics_material_override = SubResource("PhysicsMaterial_vdoeu")
+gravity_scale = 1.35
 continuous_cd = true
 max_contacts_reported = 1
 contact_monitor = true
 script = ExtResource("1_5s1ht")
+Speed = 10.0
 SlamVelocity = 100.0
 area3D = NodePath("Area3D")
 groundSlamSound = NodePath("GroundSlam")

@@ -1,11 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://dclstik3gb257"]
+[gd_scene load_steps=10 format=3 uid="uid://dclstik3gb257"]
 
 [ext_resource type="Texture2D" uid="uid://p2yerrtjjfkl" path="res://icon.svg" id="1_mvofy"]
 [ext_resource type="Script" path="res://Scripts/MainMenu.cs" id="1_ngsuk"]
-[ext_resource type="PackedScene" uid="uid://jw2f5x6lx0v6" path="res://Scenes/Nicklas.tscn" id="2_7hm6t"]
-[ext_resource type="PackedScene" path="res://Scenes/Marty.tscn" id="3_ddjsu"]
 [ext_resource type="PackedScene" uid="uid://x2jkh8gddge6" path="res://Scenes/UI/BtnLevel.tscn" id="3_q3egg"]
-[ext_resource type="PackedScene" uid="uid://cervu86sb3c7t" path="res://Scenes/TestScene.tscn" id="4_c7j7p"]
+[ext_resource type="PackedScene" uid="uid://o6mq3phmufrm" path="res://Scenes/Levels/Level_02.tscn" id="3_tuev7"]
+[ext_resource type="PackedScene" uid="uid://d2w71o2tt8tlg" path="res://Scenes/Levels/Level_03.tscn" id="4_p6215"]
 [ext_resource type="PackedScene" uid="uid://du7lxxhjet31" path="res://Scenes/Levels/Level_01.tscn" id="5_he7c6"]
 [ext_resource type="PackedScene" uid="uid://c6r2fwt85ovpb" path="res://Scenes/HUD.tscn" id="7_u1rs8"]
 [ext_resource type="Script" path="res://Scenes/VolumeSlider.cs" id="9_prsiu"]
@@ -21,7 +20,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ngsuk")
-levels = Array[PackedScene]([ExtResource("2_7hm6t"), ExtResource("3_ddjsu"), ExtResource("4_c7j7p"), ExtResource("5_he7c6")])
+levels = Array[PackedScene]([ExtResource("5_he7c6"), ExtResource("3_tuev7"), ExtResource("4_p6215")])
 titlePanel = NodePath("Title Screen")
 levelSelectPanel = NodePath("Level Select")
 levelButtonGroup = NodePath("Level Select/GridContainer")

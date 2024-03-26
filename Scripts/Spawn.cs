@@ -30,14 +30,24 @@ public partial class Spawn : Node3D
 
 	public static void SpawnPlayer()
 	{
+		if (!IsInstanceValid(Instance))
+			return;
+
 		if (!IsInstanceValid(PlayerController.Instance))
 		{
 			PlayerController player = Instance.playerPrefab.Instantiate<PlayerController>();
-			Instance.GetTree().Root.AddChild(player);
+			player.TreeEntered += PositionPlayer;	// Position player after they have entered the tree
+			Instance.GetTree().Root.CallDeferred(MethodName.AddChild, player);  // For some reason, this method call must be 'deferred' otherwise
+																				// the child is added before the tree is built
 		}
+		else
+		{
+			PositionPlayer();
+		}
+	}
 
-		// // Emit spawn signal
-		// Instance.EmitSignal(SignalName.OnSpawn, "position", Instance.Position);
+	private static void PositionPlayer()
+	{
 		PlayerController.Respawn(Instance.GlobalPosition);
 	}
 }

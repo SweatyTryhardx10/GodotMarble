@@ -1,8 +1,9 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://brkqlb8r7dwp0"]
 
-[ext_resource type="Texture2D" uid="uid://chb65y16yotcy" path="res://Textures/gridbox-prototype/prototype_512x512_blue1.png" id="1_np3r3"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_41u07"]
+load_path = "res://.godot/imported/prototype_512x512_blue1.png-f32073be49cee4df8c4960653134f9a9.s3tc.ctex"
 
 [resource]
-albedo_texture = ExtResource("1_np3r3")
+albedo_texture = SubResource("CompressedTexture2D_41u07")
 uv1_triplanar = true
 uv1_world_triplanar = true
