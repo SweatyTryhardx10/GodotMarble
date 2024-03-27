@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public partial class MainMenu : Control
+public partial class MainMenu : Node
 {
 	[Export] private PackedScene[] levels;
 
@@ -29,7 +29,9 @@ public partial class MainMenu : Control
 			(btn as Button).Pressed += () => { LoadScene(loadIndex); };
 
 			// Change text on nested label on button
-			btn.GetNode<Label>("Label").Text = levels[i].ResourcePath.Split('/').Last();
+			string sceneFileName = levels[i].ResourcePath.Split('/').Last();
+			string btnText = sceneFileName.Split('.').First().Replace('_', ' ');
+			btn.GetNode<Label>("Label").Text = btnText;
 
 			// Add button to the button group
 			levelButtonGroup.AddChild(btn);

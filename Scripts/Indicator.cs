@@ -3,6 +3,8 @@ using System;
 
 public partial class Indicator : TextureRect
 {
+	[Export] private float rotationOffset = 30f;
+	
 	private Node3D followTarget;
 
 	// Called when the node enters the scene tree for the first time.
@@ -29,7 +31,7 @@ public partial class Indicator : TextureRect
 		Camera3D cam = GetViewport().GetCamera3D();
 		Vector2 viewportSize = GetViewportRect().Size;
 
-		float borderWidth = 80f;
+		float borderWidth = 30f;
 		Vector2 uiPos = cam.UnprojectPosition(followTarget.Position);
 		float x = Math.Clamp(uiPos.X, borderWidth, viewportSize.X - borderWidth);
 		float y = Math.Clamp(uiPos.Y, borderWidth, viewportSize.Y - borderWidth);
@@ -41,6 +43,12 @@ public partial class Indicator : TextureRect
 			y += ((viewportSize.Y / 2f) - y) * 2f;
 		}
 
+		// Set position
 		Position = new Vector2(x, y);
+		
+		// Rotate texture accordingly
+		Vector2 screenCenter = viewportSize / 2f;
+		float offset = Mathf.DegToRad(rotationOffset);
+		Rotation = Vector2.Up.AngleTo(Position - screenCenter) + offset;
 	}
 }

@@ -7,6 +7,5 @@ albedo_color = Color(0, 0.596078, 1, 1)
 emission_enabled = true
 emission = Color(0, 0, 1, 1)
 emission_texture = ExtResource("1_34hhb")
-uv1_scale = Vector3(0.25, 0.25, 0.25)
 uv1_triplanar = true
 uv1_world_triplanar = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dclstik3gb257"]
+[gd_scene load_steps=20 format=3 uid="uid://dclstik3gb257"]
 
 [ext_resource type="Texture2D" uid="uid://p2yerrtjjfkl" path="res://icon.svg" id="1_mvofy"]
 [ext_resource type="Script" path="res://Scripts/MainMenu.cs" id="1_ngsuk"]
@@ -6,29 +6,58 @@
 [ext_resource type="PackedScene" uid="uid://o6mq3phmufrm" path="res://Scenes/Levels/Level_02.tscn" id="3_tuev7"]
 [ext_resource type="PackedScene" uid="uid://d2w71o2tt8tlg" path="res://Scenes/Levels/Level_03.tscn" id="4_p6215"]
 [ext_resource type="PackedScene" uid="uid://du7lxxhjet31" path="res://Scenes/Levels/Level_01.tscn" id="5_he7c6"]
+[ext_resource type="Theme" uid="uid://r2cg7b41e161" path="res://UI_Theme.tres" id="7_pijqp"]
 [ext_resource type="PackedScene" uid="uid://c6r2fwt85ovpb" path="res://Scenes/HUD.tscn" id="7_u1rs8"]
+[ext_resource type="Material" uid="uid://diwtx2i3i2us8" path="res://Materials/emissive_blue.tres" id="9_o13sm"]
 [ext_resource type="Script" path="res://Scenes/VolumeSlider.cs" id="9_prsiu"]
+[ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_brown.tres" id="10_0ogib"]
+[ext_resource type="Texture2D" uid="uid://dy88vrrt23aru" path="res://Textures/gridbox-prototype/prototype_512x512_orange.png" id="11_r22l6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_giaoo"]
 font_size = 64
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("titlePanel", "levelSelectPanel", "levelButtonGroup", "optionsPanel")]
+[sub_resource type="BoxMesh" id="BoxMesh_0uhna"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_1r148"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bcb67"]
+albedo_texture = ExtResource("11_r22l6")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="TextMesh" id="TextMesh_evikd"]
+text = "GODOT
+MARBLE"
+line_spacing = -6.235
+pixel_size = 0.16
+depth = 0.26
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8l6yg"]
+albedo_texture = ExtResource("1_mvofy")
+uv1_scale = Vector3(2.975, 1.985, 1.985)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3i8gy"]
+material = SubResource("StandardMaterial3D_8l6yg")
+
+[node name="Node3D" type="Node3D" node_paths=PackedStringArray("titlePanel", "levelSelectPanel", "levelButtonGroup", "optionsPanel")]
+script = ExtResource("1_ngsuk")
+levels = Array[PackedScene]([ExtResource("5_he7c6"), ExtResource("3_tuev7"), ExtResource("4_p6215")])
+titlePanel = NodePath("MainMenu/Title Screen")
+levelSelectPanel = NodePath("MainMenu/Level Select")
+levelButtonGroup = NodePath("MainMenu/Level Select/GridContainer")
+levelButtonPrefab = ExtResource("3_q3egg")
+hudPrefab = ExtResource("7_u1rs8")
+optionsPanel = NodePath("MainMenu/Options")
+
+[node name="MainMenu" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_ngsuk")
-levels = Array[PackedScene]([ExtResource("5_he7c6"), ExtResource("3_tuev7"), ExtResource("4_p6215")])
-titlePanel = NodePath("Title Screen")
-levelSelectPanel = NodePath("Level Select")
-levelButtonGroup = NodePath("Level Select/GridContainer")
-levelButtonPrefab = ExtResource("3_q3egg")
-hudPrefab = ExtResource("7_u1rs8")
-optionsPanel = NodePath("Options")
 
-[node name="Title Screen" type="Control" parent="."]
+[node name="Title Screen" type="Control" parent="MainMenu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,7 +66,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="BtnPlay" type="Button" parent="Title Screen"]
+[node name="BtnPlay" type="Button" parent="MainMenu/Title Screen"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -50,9 +79,10 @@ offset_right = 110.0
 offset_bottom = 89.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("7_pijqp")
 text = "PLAY GAME"
 
-[node name="BtnOptions" type="Button" parent="Title Screen"]
+[node name="BtnOptions" type="Button" parent="MainMenu/Title Screen"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -65,9 +95,10 @@ offset_right = 110.0
 offset_bottom = 149.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("7_pijqp")
 text = "OPTIONS"
 
-[node name="BtnExit" type="Button" parent="Title Screen"]
+[node name="BtnExit" type="Button" parent="MainMenu/Title Screen"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -80,9 +111,11 @@ offset_right = 110.0
 offset_bottom = 209.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("7_pijqp")
 text = "EXIT"
 
-[node name="Label" type="Label" parent="Title Screen"]
+[node name="Label" type="Label" parent="MainMenu/Title Screen"]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -96,7 +129,8 @@ label_settings = SubResource("LabelSettings_giaoo")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="Title Screen"]
+[node name="TextureRect" type="TextureRect" parent="MainMenu/Title Screen"]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -108,7 +142,7 @@ offset_bottom = 262.885
 grow_horizontal = 2
 texture = ExtResource("1_mvofy")
 
-[node name="Level Select" type="Control" parent="."]
+[node name="Level Select" type="Control" parent="MainMenu"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -118,7 +152,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="Level Select"]
+[node name="Label" type="Label" parent="MainMenu/Level Select"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -132,7 +166,7 @@ label_settings = SubResource("LabelSettings_giaoo")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GridContainer" type="GridContainer" parent="Level Select"]
+[node name="GridContainer" type="GridContainer" parent="MainMenu/Level Select"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -147,7 +181,7 @@ grow_horizontal = 2
 grow_vertical = 0
 columns = 5
 
-[node name="BtnBack" type="Button" parent="Level Select"]
+[node name="BtnBack" type="Button" parent="MainMenu/Level Select"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -162,7 +196,7 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Back"
 
-[node name="Options" type="Control" parent="."]
+[node name="Options" type="Control" parent="MainMenu"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -171,7 +205,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="Options"]
+[node name="Label" type="Label" parent="MainMenu/Options"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -182,7 +216,7 @@ label_settings = SubResource("LabelSettings_giaoo")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Container" type="Control" parent="Options"]
+[node name="Container" type="Control" parent="MainMenu/Options"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -196,14 +230,14 @@ offset_bottom = 216.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Slider (and text)" type="Control" parent="Options/Container"]
+[node name="Slider (and text)" type="Control" parent="MainMenu/Options/Container"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 58.0
 grow_horizontal = 2
 
-[node name="Label" type="Label" parent="Options/Container/Slider (and text)"]
+[node name="Label" type="Label" parent="MainMenu/Options/Container/Slider (and text)"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -212,7 +246,7 @@ grow_horizontal = 2
 text = "Master Volume"
 horizontal_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="Options/Container/Slider (and text)"]
+[node name="HSlider" type="HSlider" parent="MainMenu/Options/Container/Slider (and text)"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -227,7 +261,7 @@ grow_vertical = 0
 value = 80.0
 script = ExtResource("9_prsiu")
 
-[node name="Slider (and text)2" type="Control" parent="Options/Container"]
+[node name="Slider (and text)2" type="Control" parent="MainMenu/Options/Container"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -235,7 +269,7 @@ offset_top = 67.0
 offset_bottom = 125.0
 grow_horizontal = 2
 
-[node name="Label" type="Label" parent="Options/Container/Slider (and text)2"]
+[node name="Label" type="Label" parent="MainMenu/Options/Container/Slider (and text)2"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -244,7 +278,7 @@ grow_horizontal = 2
 text = "Music Volume"
 horizontal_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="Options/Container/Slider (and text)2"]
+[node name="HSlider" type="HSlider" parent="MainMenu/Options/Container/Slider (and text)2"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -260,7 +294,7 @@ value = 100.0
 script = ExtResource("9_prsiu")
 busName = "Music"
 
-[node name="Slider (and text)3" type="Control" parent="Options/Container"]
+[node name="Slider (and text)3" type="Control" parent="MainMenu/Options/Container"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -268,7 +302,7 @@ offset_top = 136.835
 offset_bottom = 194.835
 grow_horizontal = 2
 
-[node name="Label" type="Label" parent="Options/Container/Slider (and text)3"]
+[node name="Label" type="Label" parent="MainMenu/Options/Container/Slider (and text)3"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -277,7 +311,7 @@ grow_horizontal = 2
 text = "Sound Effects Volume"
 horizontal_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="Options/Container/Slider (and text)3"]
+[node name="HSlider" type="HSlider" parent="MainMenu/Options/Container/Slider (and text)3"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -293,7 +327,7 @@ value = 100.0
 script = ExtResource("9_prsiu")
 busName = "SFX"
 
-[node name="BtnBack" type="Button" parent="Options"]
+[node name="BtnBack" type="Button" parent="MainMenu/Options"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -308,11 +342,45 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Back"
 
-[connection signal="pressed" from="Title Screen/BtnPlay" to="." method="OnBtnPlayPressed"]
-[connection signal="pressed" from="Title Screen/BtnOptions" to="." method="OnBtnOptionsPressed"]
-[connection signal="pressed" from="Title Screen/BtnExit" to="." method="OnBtnExitPressed"]
-[connection signal="pressed" from="Level Select/BtnBack" to="." method="OnBtnBackPressed"]
-[connection signal="value_changed" from="Options/Container/Slider (and text)/HSlider" to="Options/Container/Slider (and text)/HSlider" method="OnValueChanged"]
-[connection signal="value_changed" from="Options/Container/Slider (and text)2/HSlider" to="Options/Container/Slider (and text)2/HSlider" method="OnValueChanged"]
-[connection signal="value_changed" from="Options/Container/Slider (and text)3/HSlider" to="Options/Container/Slider (and text)3/HSlider" method="OnValueChanged"]
-[connection signal="pressed" from="Options/BtnBack" to="." method="OnBtnBackPressed"]
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.988597, -0.150588, 0, 0.150588, 0.988597, 0, 3.74053, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(37.0969, 0, 0, 0, 19.9994, 0, 0, 0, 0.999999, 0, 8.11974, -10.467)
+material_override = ExtResource("9_o13sm")
+mesh = SubResource("BoxMesh_0uhna")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(34.8111, 0, 0, 0, 13.3095, 0, 0, 0, 1, 0, -1.10245, -8.91706)
+material_override = ExtResource("10_0ogib")
+mesh = SubResource("BoxMesh_1r148")
+
+[node name="Text (Mesh)" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.57724, -8.89525)
+material_override = SubResource("StandardMaterial3D_bcb67")
+mesh = SubResource("TextMesh_evikd")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.704919, -0.709288, 0, 0.709288, 0.704919, 0, 0.0306549, -2.09558)
+light_energy = 16.0
+shadow_enabled = true
+spot_range = 33.071
+spot_angle = 48.91
+spot_angle_attenuation = 0.0947325
+
+[node name="Godot Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(5.18926, 0, -0.180409, 0, 5.16042, 0, 1.08627, 0, 0.861841, 8.6894, 8.13497, -8.94999)
+mesh = SubResource("BoxMesh_3i8gy")
+
+[node name="Godot Mesh2" type="MeshInstance3D" parent="."]
+transform = Transform3D(5.1897, 0, 0.180063, 0, 5.16042, 0, -1.08418, 0, 0.861913, -8.72453, 8.135, -8.95)
+mesh = SubResource("BoxMesh_3i8gy")
+
+[connection signal="pressed" from="MainMenu/Title Screen/BtnPlay" to="." method="OnBtnPlayPressed"]
+[connection signal="pressed" from="MainMenu/Title Screen/BtnOptions" to="." method="OnBtnOptionsPressed"]
+[connection signal="pressed" from="MainMenu/Title Screen/BtnExit" to="." method="OnBtnExitPressed"]
+[connection signal="pressed" from="MainMenu/Level Select/BtnBack" to="." method="OnBtnBackPressed"]
+[connection signal="value_changed" from="MainMenu/Options/Container/Slider (and text)/HSlider" to="MainMenu/Options/Container/Slider (and text)/HSlider" method="OnValueChanged"]
+[connection signal="value_changed" from="MainMenu/Options/Container/Slider (and text)2/HSlider" to="MainMenu/Options/Container/Slider (and text)2/HSlider" method="OnValueChanged"]
+[connection signal="value_changed" from="MainMenu/Options/Container/Slider (and text)3/HSlider" to="MainMenu/Options/Container/Slider (and text)3/HSlider" method="OnValueChanged"]
+[connection signal="pressed" from="MainMenu/Options/BtnBack" to="." method="OnBtnBackPressed"]
