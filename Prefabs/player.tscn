@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://b881ihonj4cd8"]
+[gd_scene load_steps=38 format=3 uid="uid://b881ihonj4cd8"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerController.cs" id="1_5s1ht"]
 [ext_resource type="PackedScene" uid="uid://01yr66718b6v" path="res://Prefabs/chase_cam.tscn" id="2_2viy4"]
@@ -15,6 +15,11 @@
 [ext_resource type="Texture2D" uid="uid://bn0338abi7sjn" path="res://Textures/Asphalt/PatchedAsphalt_Roughness.png" id="8_t6m1l"]
 [ext_resource type="AudioStream" uid="uid://c485w4sei0gm5" path="res://Sounds/jump3.wav" id="9_s4cq8"]
 [ext_resource type="AudioStream" uid="uid://4mj18ep768yi" path="res://Sounds/525096__jomse__plasticimpacta7.wav" id="10_vi4sv"]
+[ext_resource type="Material" uid="uid://bw8nf2roikgfe" path="res://Materials/Particles/particle_xxx.tres" id="16_nv02g"]
+[ext_resource type="AudioStream" uid="uid://b1t6fm3is7pes" path="res://Sounds/Low Rumble Loop 5.wav" id="16_pwdnu"]
+[ext_resource type="Material" uid="uid://cs4cvg1u8k7l" path="res://Materials/Particles/particle_ring_flat.tres" id="18_jfqyc"]
+[ext_resource type="Script" path="res://Scripts/ParticleCustom.cs" id="18_sn0tv"]
+[ext_resource type="Material" uid="uid://bn62u608pbf2w" path="res://Materials/Particles/particle_spark.tres" id="20_1c0bg"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vdoeu"]
 bounce = 0.3
@@ -76,7 +81,42 @@ streams_count = 1
 stream_0/stream = ExtResource("10_vi4sv")
 stream_0/weight = 1.0
 
-[node name="Player" type="RigidBody3D" node_paths=PackedStringArray("area3D", "groundSlamSound", "jumpSound", "landSound")]
+[sub_resource type="QuadMesh" id="QuadMesh_hx1if"]
+material = ExtResource("16_nv02g")
+size = Vector2(0.5, 0.5)
+
+[sub_resource type="Curve" id="Curve_8arwd"]
+max_value = 5.0
+_data = [Vector2(0.00409836, 3.69707), 0.0, -8.45382, 0, 0, Vector2(1, 1.15635), 2.19055, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_3wo8n"]
+max_value = 8.95
+_data = [Vector2(0, 0), 0.0, 17.9983, 0, 0, Vector2(1, 8.95), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_33hxt"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0.341176, 1, 0)
+
+[sub_resource type="QuadMesh" id="QuadMesh_aerj7"]
+material = ExtResource("18_jfqyc")
+orientation = 1
+
+[sub_resource type="Curve" id="Curve_pbswe"]
+_data = [Vector2(0, 0.285714), 0.0, 1.34066, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_0su6c"]
+colors = PackedColorArray(1, 1, 1, 1, 0.27451, 0.407843, 1, 0)
+
+[sub_resource type="QuadMesh" id="QuadMesh_tw0cv"]
+material = ExtResource("20_1c0bg")
+
+[sub_resource type="Gradient" id="Gradient_enthm"]
+offsets = PackedFloat32Array(0.467593, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="Player" type="RigidBody3D" node_paths=PackedStringArray("area3D", "groundSlamSound", "jumpSound", "landSound", "rollSound", "slamParticles", "landParticles")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00389004, 2.19659, -2.0347)
 physics_material_override = SubResource("PhysicsMaterial_vdoeu")
 gravity_scale = 1.35
@@ -90,6 +130,9 @@ area3D = NodePath("Area3D")
 groundSlamSound = NodePath("GroundSlam")
 jumpSound = NodePath("Jump")
 landSound = NodePath("Land")
+rollSound = NodePath("Rolling")
+slamParticles = NodePath("Particles Slam")
+landParticles = NodePath("Particles Land")
 cameraPrefab = ExtResource("2_2viy4")
 
 [node name="MarbleCollider" type="CollisionShape3D" parent="."]
@@ -108,14 +151,83 @@ shape = SubResource("SphereShape3D_ivhby")
 [node name="GroundSlam" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamRandomizer_6f615")
 volume_db = -6.957
+unit_size = 60.0
 bus = &"SFX"
 
 [node name="Jump" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamRandomizer_oq7of")
+unit_size = 60.0
 bus = &"SFX"
 
 [node name="Land" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamRandomizer_52c1f")
+attenuation_model = 3
 unit_size = 100.0
 max_db = 0.0
 bus = &"SFX"
+
+[node name="Rolling" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.219579, 0, 0.0502944)
+stream = ExtResource("16_pwdnu")
+unit_size = 60.0
+max_db = 0.0
+bus = &"SFX"
+
+[node name="Particles Slam" type="CPUParticles3D" parent="."]
+emitting = false
+amount = 20
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 0.4
+draw_order = 2
+mesh = SubResource("QuadMesh_hx1if")
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+spread = 180.0
+initial_velocity_min = 10.0
+initial_velocity_max = 15.0
+angular_velocity_min = -12.7
+angular_velocity_max = 120.0
+linear_accel_max = 10.61
+damping_max = 20.0
+damping_curve = SubResource("Curve_8arwd")
+angle_min = -90.0
+angle_max = 90.0
+scale_amount_max = 42.2
+scale_amount_curve = SubResource("Curve_3wo8n")
+color_ramp = SubResource("Gradient_33hxt")
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+script = ExtResource("18_sn0tv")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="Particles Slam"]
+emitting = false
+amount = 2
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+mesh = SubResource("QuadMesh_aerj7")
+gravity = Vector3(0, 0, 0)
+scale_amount_min = 0.5
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_pbswe")
+color_ramp = SubResource("Gradient_0su6c")
+
+[node name="Particles Land" type="CPUParticles3D" parent="."]
+emitting = false
+amount = 40
+one_shot = true
+explosiveness = 1.0
+mesh = SubResource("QuadMesh_tw0cv")
+emission_shape = 2
+emission_sphere_radius = 0.5
+direction = Vector3(0, 1, 0)
+spread = 60.0
+initial_velocity_min = 4.0
+initial_velocity_max = 7.57
+color = Color(0.992157, 0.584314, 0.431373, 1)
+color_ramp = SubResource("Gradient_enthm")
+script = ExtResource("18_sn0tv")

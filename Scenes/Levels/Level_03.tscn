@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=3 uid="uid://d2w71o2tt8tlg"]
 
-[ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_green1.tres" id="1_0shw6"]
+[ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_yellow.tres" id="1_0shw6"]
 [ext_resource type="PackedScene" uid="uid://ngddmglqy453" path="res://Prefabs/spawn.tscn" id="1_4ar1a"]
 [ext_resource type="Script" path="res://Scripts/LevelManager.cs" id="1_d2nsm"]
 [ext_resource type="Texture2D" uid="uid://ffy4bbt533rm" path="res://Textures/gridbox-prototype/prototype_512x512_green1.png" id="2_0iixh"]

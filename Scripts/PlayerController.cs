@@ -16,7 +16,24 @@ public partial class PlayerController : RigidBody3D
 		cam.target = this;
 		GetParent().AddChild(cam);
 
-		// Collision callback
+		// Callbacks (for roll sound)
+		BodyEntered += (Node n) =>
+		{
+			if (this.GetContactCount() > 0)
+			{
+				GD.Print("Roll sound started!");
+				rollSound.Play();
+			}
+		};
+
+		BodyExited += (Node n) =>
+		{
+			if (this.GetContactCount() == 0)
+			{
+				GD.Print("Roll sound stopped!");
+				rollSound.Stop();
+			}
+		};
 	}
 
 	[Export] private float Speed = 5.0f;
@@ -27,11 +44,14 @@ public partial class PlayerController : RigidBody3D
 	[Export] private AudioStreamPlayer3D groundSlamSound;
 	[Export] private AudioStreamPlayer3D jumpSound;
 	[Export] private AudioStreamPlayer3D landSound;
+	[Export] private AudioStreamPlayer3D rollSound;
+	[Export] private ParticleCustom slamParticles;
+	[Export] private ParticleCustom landParticles;
 	[Export] private PackedScene cameraPrefab;
 	private bool isSlamming = false;
-	
+
 	private Vector3 oldVel;
-	
+
 	public override void _PhysicsProcess(double delta)
 	{
 		Vector2 inputDir = Input.GetVector("MoveLeft", "MoveRight", "MoveUp", "MoveDown");
@@ -56,17 +76,22 @@ public partial class PlayerController : RigidBody3D
 							{
 								item2.ApplyForce(Vector3.Up * SlamForce);
 								groundSlamSound.Play();
+								slamParticles.Play();
 							}
 						}
 						else
 						{
 							item2.ApplyForce(Vector3.Up * SlamForce);
 							groundSlamSound.Play();
+							slamParticles.Play();
 						}
 					}
 				}
 			}
 		}
+
+		// Rolling sound pitch
+		rollSound.PitchScale = Mathf.Clamp(LinearVelocity.Length() / 4f, 0.2f, 4f);
 	}
 
 	public override void _IntegrateForces(PhysicsDirectBodyState3D state)
@@ -78,10 +103,13 @@ public partial class PlayerController : RigidBody3D
 			Vector3 normal = state.GetContactLocalNormal(0);
 
 			// Play land sound of the "normal-velocity" is above a threshold
-			if (state.LinearVelocity.Project(normal).Length() > 1f && state.LinearVelocity.Normalized().Dot(normal) < 0.5f)
+			if (oldVel.Project(-normal).Length() > 0.5f && oldVel.Normalized().Dot(normal) < 0.5f)
+			{
 				landSound.Play();
+				landParticles.Play();
+			}
 		}
-		
+
 		oldVel = state.LinearVelocity;
 	}
 

@@ -1,13 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://x2jkh8gddge6"]
+[gd_scene load_steps=3 format=3 uid="uid://x2jkh8gddge6"]
+
+[ext_resource type="Theme" uid="uid://r2cg7b41e161" path="res://UI_Theme.tres" id="1_xlw1p"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_pp6nl"]
 font_size = 24
 
 [node name="BtnLevel" type="Button"]
-offset_right = 118.0
-offset_bottom = 72.0
+custom_minimum_size = Vector2(140, 100)
+offset_right = 140.0
+offset_bottom = 100.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
+theme = ExtResource("1_xlw1p")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1

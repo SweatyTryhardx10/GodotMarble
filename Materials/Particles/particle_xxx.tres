@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bw8nf2roikgfe"]
+
+[ext_resource type="Texture2D" uid="uid://jvkf5xp2xyjy" path="res://Textures/cartoonCursor.png" id="1_sa75x"]
+
+[resource]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_sa75x")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+point_size = 28.0
+proximity_fade_enabled = true
+proximity_fade_distance = 2.0
