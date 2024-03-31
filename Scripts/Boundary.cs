@@ -10,7 +10,7 @@ public partial class Boundary : Area3D
 		BodyEntered += (Node3D n) =>
 		{
 			if (n.Name == "Player")
-				Spawn.SpawnPlayer();
+				Spawn.QueueSpawn();
 			else
 			{
 				// Delete object (if it's a physics object)

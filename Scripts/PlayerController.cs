@@ -4,36 +4,50 @@ public partial class PlayerController : RigidBody3D
 {
 	public static PlayerController Instance { get; private set; }
 
-	public override void _EnterTree() => Instance = this;
-	public override void _ExitTree() => Instance = null;
+	public override void _EnterTree()
+	{
+		Instance = this;
+
+		// Callbacks (for roll sound)
+		BodyEntered += OnBodyEntered;
+		BodyExited += OnBodyExited;
+	}
+	public override void _ExitTree()
+	{
+		Instance = null;
+		
+		// Callbacks (for roll sound)
+		BodyEntered -= OnBodyEntered;
+		BodyExited -= OnBodyExited;
+	}
 
 	public override void _Ready()
 	{
 		base._Ready();
 
 		// Instantiate and configure camera on spawn
-		var cam = cameraPrefab.Instantiate<ChaseCamera>();
-		cam.target = this;
-		GetParent().AddChild(cam);
-
-		// Callbacks (for roll sound)
-		BodyEntered += (Node n) =>
+		if (spawnCamera)
 		{
-			if (this.GetContactCount() > 0)
-			{
-				GD.Print("Roll sound started!");
-				rollSound.Play();
-			}
-		};
+			var cam = cameraPrefab.Instantiate<ChaseCamera>();
+			cam.target = this;
+			GetParent().AddChild(cam);
+		}
+	}
 
-		BodyExited += (Node n) =>
+	private void OnBodyEntered(Node n)
+	{
+		if (this.GetContactCount() > 0)
 		{
-			if (this.GetContactCount() == 0)
-			{
-				GD.Print("Roll sound stopped!");
-				rollSound.Stop();
-			}
-		};
+			rollSound.Play();
+		}
+	}
+
+	private void OnBodyExited(Node n)
+	{
+		if (this.GetContactCount() == 0)
+		{
+			rollSound.Stop();
+		}
 	}
 
 	[Export] private float Speed = 5.0f;
@@ -49,6 +63,8 @@ public partial class PlayerController : RigidBody3D
 	[Export] private ParticleCustom landParticles;
 	[Export] private PackedScene cameraPrefab;
 	private bool isSlamming = false;
+
+	[Export] private bool spawnCamera = true;
 
 	private Vector3 oldVel;
 
