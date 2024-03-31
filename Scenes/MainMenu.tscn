@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dclstik3gb257"]
+[gd_scene load_steps=25 format=3 uid="uid://dclstik3gb257"]
 
 [ext_resource type="Texture2D" uid="uid://p2yerrtjjfkl" path="res://icon.svg" id="1_mvofy"]
 [ext_resource type="Script" path="res://Scripts/MainMenu.cs" id="1_ngsuk"]
@@ -12,11 +12,14 @@
 [ext_resource type="Script" path="res://Scenes/VolumeSlider.cs" id="9_prsiu"]
 [ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_yellow.tres" id="10_0ogib"]
 [ext_resource type="Texture2D" uid="uid://dy88vrrt23aru" path="res://Textures/gridbox-prototype/prototype_512x512_orange.png" id="11_r22l6"]
+[ext_resource type="PackedScene" uid="uid://bkhd1lfx0le0b" path="res://Prefabs/player_menu.tscn" id="13_acqow"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_giaoo"]
 font_size = 64
 
 [sub_resource type="BoxMesh" id="BoxMesh_0uhna"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ud4ma"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_1r148"]
 
@@ -32,6 +35,15 @@ line_spacing = -6.235
 pixel_size = 0.16
 depth = 0.26
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_r3hkv"]
+points = PackedVector3Array(-2.77696, 1.11997, -0.207798, 4.69161, 2.36445, 0.258988, 4.69161, 1.89732, 0.258988, -2.77696, 1.11997, 0.258988, 4.06874, 0.186548, -0.207798, -1.99765, 2.36445, -0.207798, 4.69161, 2.36445, -0.207798, -2.15337, 0.186548, 0.258988, 4.06874, 0.186548, 0.258988, -1.99765, 2.36445, 0.258988, -2.15337, 0.186548, -0.207798, -2.4648, 2.2086, 0.258988, -2.62125, 0.497616, 0.258988, -2.62125, 1.89732, -0.207798, 4.69161, 1.89732, -0.207798, -2.62125, 0.497616, -0.207798, -2.77696, 1.43061, 0.258988, -2.4648, 2.2086, -0.207798, -2.77696, 1.43061, -0.207798, -2.4648, 0.341976, 0.258988, -2.62125, 1.89732, 0.258988, -2.4648, 0.341976, -0.207798)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7pyrv"]
+points = PackedVector3Array(-2.7762, -1.99192, -0.207798, 5.00204, -0.43626, 0.258988, 5.00204, -0.43626, -0.207798, 5.00204, -2.459, 0.258988, -2.1534, -0.43626, 0.258988, 5.00204, -2.459, -0.207798, -2.7762, -2.459, 0.258988, -2.1534, -0.43626, -0.207798, -2.7762, -2.459, -0.207798, -2.30948, -0.591885, 0.258988, -2.7762, -1.99192, 0.258988, -2.30948, -0.591885, -0.207798)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_vjyne"]
+points = PackedVector3Array(-3.86642, 2.36398, 0.258988, -4.9551, -2.45853, -0.207798, -4.9551, -2.45853, 0.258988, -2.93256, -2.45853, -0.207798, -4.48827, 1.89712, -0.207798, -2.93256, -2.45853, 0.258988, -2.93256, 2.2082, -0.207798, -2.93256, 2.2082, 0.258988, -4.9551, -0.435772, 0.258988, -4.48827, 1.89712, 0.258988, -4.9551, -0.435772, -0.207798, -3.86642, 2.36398, -0.207798, -3.24398, 2.36398, -0.207798, -3.24398, 2.36398, 0.258988, -4.17705, 2.2082, 0.258988, -4.17705, 2.2082, -0.207798)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8l6yg"]
 albedo_texture = ExtResource("1_mvofy")
 uv1_scale = Vector3(2.975, 1.985, 1.985)
@@ -39,17 +51,17 @@ uv1_scale = Vector3(2.975, 1.985, 1.985)
 [sub_resource type="BoxMesh" id="BoxMesh_3i8gy"]
 material = SubResource("StandardMaterial3D_8l6yg")
 
-[node name="Node3D" type="Node3D" node_paths=PackedStringArray("titlePanel", "levelSelectPanel", "levelButtonGroup", "optionsPanel")]
+[node name="Main Menu (Root)" type="Node3D" node_paths=PackedStringArray("titlePanel", "levelSelectPanel", "levelButtonGroup", "optionsPanel")]
 script = ExtResource("1_ngsuk")
 levels = Array[PackedScene]([ExtResource("5_he7c6"), ExtResource("3_tuev7"), ExtResource("4_p6215")])
-titlePanel = NodePath("MainMenu/Title Screen")
-levelSelectPanel = NodePath("MainMenu/Level Select")
-levelButtonGroup = NodePath("MainMenu/Level Select/GridContainer")
+titlePanel = NodePath("UI/Title Screen")
+levelSelectPanel = NodePath("UI/Level Select")
+levelButtonGroup = NodePath("UI/Level Select/GridContainer")
 levelButtonPrefab = ExtResource("3_q3egg")
 hudPrefab = ExtResource("7_u1rs8")
-optionsPanel = NodePath("MainMenu/Options")
+optionsPanel = NodePath("UI/Options")
 
-[node name="MainMenu" type="Control" parent="."]
+[node name="UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -57,7 +69,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Title Screen" type="Control" parent="MainMenu"]
+[node name="Title Screen" type="Control" parent="UI"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -66,7 +78,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="BtnPlay" type="Button" parent="MainMenu/Title Screen"]
+[node name="BtnPlay" type="Button" parent="UI/Title Screen"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -82,7 +94,7 @@ grow_vertical = 2
 theme = ExtResource("7_pijqp")
 text = "PLAY GAME"
 
-[node name="BtnOptions" type="Button" parent="MainMenu/Title Screen"]
+[node name="BtnOptions" type="Button" parent="UI/Title Screen"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -98,7 +110,7 @@ grow_vertical = 2
 theme = ExtResource("7_pijqp")
 text = "OPTIONS"
 
-[node name="BtnExit" type="Button" parent="MainMenu/Title Screen"]
+[node name="BtnExit" type="Button" parent="UI/Title Screen"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -114,7 +126,7 @@ grow_vertical = 2
 theme = ExtResource("7_pijqp")
 text = "EXIT"
 
-[node name="Label" type="Label" parent="MainMenu/Title Screen"]
+[node name="Label" type="Label" parent="UI/Title Screen"]
 visible = false
 layout_mode = 1
 anchors_preset = 5
@@ -129,7 +141,7 @@ label_settings = SubResource("LabelSettings_giaoo")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="MainMenu/Title Screen"]
+[node name="TextureRect" type="TextureRect" parent="UI/Title Screen"]
 visible = false
 layout_mode = 1
 anchors_preset = 5
@@ -142,7 +154,7 @@ offset_bottom = 262.885
 grow_horizontal = 2
 texture = ExtResource("1_mvofy")
 
-[node name="Level Select" type="Control" parent="MainMenu"]
+[node name="Level Select" type="Control" parent="UI"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -152,7 +164,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="MainMenu/Level Select"]
+[node name="Label" type="Label" parent="UI/Level Select"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -166,7 +178,7 @@ label_settings = SubResource("LabelSettings_giaoo")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GridContainer" type="GridContainer" parent="MainMenu/Level Select"]
+[node name="GridContainer" type="GridContainer" parent="UI/Level Select"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -181,7 +193,7 @@ grow_horizontal = 2
 grow_vertical = 0
 columns = 5
 
-[node name="BtnBack" type="Button" parent="MainMenu/Level Select"]
+[node name="BtnBack" type="Button" parent="UI/Level Select"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -196,7 +208,7 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Back"
 
-[node name="Options" type="Control" parent="MainMenu"]
+[node name="Options" type="Control" parent="UI"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -205,7 +217,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="MainMenu/Options"]
+[node name="Label" type="Label" parent="UI/Options"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -216,7 +228,7 @@ label_settings = SubResource("LabelSettings_giaoo")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Container" type="Control" parent="MainMenu/Options"]
+[node name="Container" type="Control" parent="UI/Options"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -230,14 +242,14 @@ offset_bottom = 216.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Slider (and text)" type="Control" parent="MainMenu/Options/Container"]
+[node name="Slider (and text)" type="Control" parent="UI/Options/Container"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 58.0
 grow_horizontal = 2
 
-[node name="Label" type="Label" parent="MainMenu/Options/Container/Slider (and text)"]
+[node name="Label" type="Label" parent="UI/Options/Container/Slider (and text)"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -246,7 +258,7 @@ grow_horizontal = 2
 text = "Master Volume"
 horizontal_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="MainMenu/Options/Container/Slider (and text)"]
+[node name="HSlider" type="HSlider" parent="UI/Options/Container/Slider (and text)"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -261,7 +273,7 @@ grow_vertical = 0
 value = 80.0
 script = ExtResource("9_prsiu")
 
-[node name="Slider (and text)2" type="Control" parent="MainMenu/Options/Container"]
+[node name="Slider (and text)2" type="Control" parent="UI/Options/Container"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -269,7 +281,7 @@ offset_top = 67.0
 offset_bottom = 125.0
 grow_horizontal = 2
 
-[node name="Label" type="Label" parent="MainMenu/Options/Container/Slider (and text)2"]
+[node name="Label" type="Label" parent="UI/Options/Container/Slider (and text)2"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -278,7 +290,7 @@ grow_horizontal = 2
 text = "Music Volume"
 horizontal_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="MainMenu/Options/Container/Slider (and text)2"]
+[node name="HSlider" type="HSlider" parent="UI/Options/Container/Slider (and text)2"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -294,7 +306,7 @@ value = 100.0
 script = ExtResource("9_prsiu")
 busName = "Music"
 
-[node name="Slider (and text)3" type="Control" parent="MainMenu/Options/Container"]
+[node name="Slider (and text)3" type="Control" parent="UI/Options/Container"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -302,7 +314,7 @@ offset_top = 136.835
 offset_bottom = 194.835
 grow_horizontal = 2
 
-[node name="Label" type="Label" parent="MainMenu/Options/Container/Slider (and text)3"]
+[node name="Label" type="Label" parent="UI/Options/Container/Slider (and text)3"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -311,7 +323,7 @@ grow_horizontal = 2
 text = "Sound Effects Volume"
 horizontal_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="MainMenu/Options/Container/Slider (and text)3"]
+[node name="HSlider" type="HSlider" parent="UI/Options/Container/Slider (and text)3"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -327,7 +339,7 @@ value = 100.0
 script = ExtResource("9_prsiu")
 busName = "SFX"
 
-[node name="BtnBack" type="Button" parent="MainMenu/Options"]
+[node name="BtnBack" type="Button" parent="UI/Options"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -343,25 +355,85 @@ grow_vertical = 0
 text = "Back"
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.988597, -0.150588, 0, 0.150588, 0.988597, 0, 3.74053, 0)
+transform = Transform3D(1, 0, 0, 0, 0.255648, 0.96677, 0, -0.96677, 0.255648, 0, 19.0676, -5.81297)
+fov = 60.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(37.0969, 0, 0, 0, 19.9994, 0, 0, 0, 0.999999, 0, 8.11974, -10.467)
+transform = Transform3D(37.0969, 0, 0, 0, -8.74201e-07, 0.999999, 0, -19.9994, -4.37113e-08, 0, 2.89467, -10.8497)
 material_override = ExtResource("9_o13sm")
 mesh = SubResource("BoxMesh_0uhna")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(34.8111, 0, 0, 0, 13.3095, 0, 0, 0, 1, 0, -1.10245, -8.91706)
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, -3.55271e-15, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_ud4ma")
+
+[node name="Wall" type="MeshInstance3D" parent="."]
+transform = Transform3D(36.8582, 0, 0, 0, -6.45172e-08, 1.38403, 0, -1.47598, -6.04978e-08, 0, 4.08785, -1.03935)
 material_override = ExtResource("10_0ogib")
 mesh = SubResource("BoxMesh_1r148")
 
+[node name="StaticBody3D" type="StaticBody3D" parent="Wall"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, -3.55271e-15, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_ud4ma")
+
+[node name="Wall2" type="MeshInstance3D" parent="."]
+transform = Transform3D(36.8582, 0, 0, 0, -6.45172e-08, 1.38403, 0, -1.47598, -6.04978e-08, 0, 4.08785, -21.3223)
+material_override = ExtResource("10_0ogib")
+mesh = SubResource("BoxMesh_1r148")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Wall2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall2/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, -3.55271e-15, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_ud4ma")
+
+[node name="Wall3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-9.54568e-07, 1.47598, 6.04978e-08, 0, -6.45172e-08, 1.38403, 21.838, 6.45172e-08, 1.24785e-14, -18.6311, 4.08785, -11.092)
+material_override = ExtResource("10_0ogib")
+mesh = SubResource("BoxMesh_1r148")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Wall3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall3/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, -3.55271e-15, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_ud4ma")
+
+[node name="Wall4" type="MeshInstance3D" parent="."]
+transform = Transform3D(-9.54568e-07, 1.47598, 6.04978e-08, 0, -6.45172e-08, 1.38403, 21.838, 6.45172e-08, 1.24785e-14, 19.0371, 4.08785, -11.092)
+material_override = ExtResource("10_0ogib")
+mesh = SubResource("BoxMesh_1r148")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Wall4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall4/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, -3.55271e-15, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_ud4ma")
+
 [node name="Text (Mesh)" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.57724, -8.89525)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3.54715, -16.5747)
 material_override = SubResource("StandardMaterial3D_bcb67")
 mesh = SubResource("TextMesh_evikd")
 
+[node name="StaticBody3D" type="StaticBody3D" parent="Text (Mesh)"]
+
+[node name="_CollisionShape3D_51305" type="CollisionShape3D" parent="Text (Mesh)/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, -0.218122, 0)
+shape = SubResource("ConvexPolygonShape3D_r3hkv")
+
+[node name="_CollisionShape3D_51304" type="CollisionShape3D" parent="Text (Mesh)/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, -0.218122, 0)
+shape = SubResource("ConvexPolygonShape3D_7pyrv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Text (Mesh)/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, -0.218122, 0)
+shape = SubResource("ConvexPolygonShape3D_vjyne")
+
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.704919, -0.709288, 0, 0.709288, 0.704919, 0, 0.0306549, -2.09558)
+transform = Transform3D(1, 0, 0, 0, 0.709288, 0.704919, 0, -0.704919, 0.709288, 0, 11.2661, -2.76061)
 light_energy = 16.0
 shadow_enabled = true
 spot_range = 33.071
@@ -369,18 +441,33 @@ spot_angle = 48.91
 spot_angle_attenuation = 0.0947325
 
 [node name="Godot Mesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(5.18926, 0, -0.180409, 0, 5.16042, 0, 1.08627, 0, 0.861841, 8.6894, 8.13497, -8.94999)
+transform = Transform3D(5.18926, 0, -0.180409, 1.08627, -2.25569e-07, 0.861841, 2.98436e-08, -5.16042, -4.03606e-08, 8.6894, 3.50339, -16.1324)
 mesh = SubResource("BoxMesh_3i8gy")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Godot Mesh"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Godot Mesh/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, -3.55271e-15, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_ud4ma")
 
 [node name="Godot Mesh2" type="MeshInstance3D" parent="."]
-transform = Transform3D(5.1897, 0, 0.180063, 0, 5.16042, 0, -1.08418, 0, 0.861913, -8.72453, 8.135, -8.95)
+transform = Transform3D(5.1897, 0, 0.180063, -1.08418, -2.25569e-07, 0.861913, 2.02056e-07, -5.16042, -3.23091e-08, -8.72453, 3.51722, -16.1324)
 mesh = SubResource("BoxMesh_3i8gy")
 
-[connection signal="pressed" from="MainMenu/Title Screen/BtnPlay" to="." method="OnBtnPlayPressed"]
-[connection signal="pressed" from="MainMenu/Title Screen/BtnOptions" to="." method="OnBtnOptionsPressed"]
-[connection signal="pressed" from="MainMenu/Title Screen/BtnExit" to="." method="OnBtnExitPressed"]
-[connection signal="pressed" from="MainMenu/Level Select/BtnBack" to="." method="OnBtnBackPressed"]
-[connection signal="value_changed" from="MainMenu/Options/Container/Slider (and text)/HSlider" to="MainMenu/Options/Container/Slider (and text)/HSlider" method="OnValueChanged"]
-[connection signal="value_changed" from="MainMenu/Options/Container/Slider (and text)2/HSlider" to="MainMenu/Options/Container/Slider (and text)2/HSlider" method="OnValueChanged"]
-[connection signal="value_changed" from="MainMenu/Options/Container/Slider (and text)3/HSlider" to="MainMenu/Options/Container/Slider (and text)3/HSlider" method="OnValueChanged"]
-[connection signal="pressed" from="MainMenu/Options/BtnBack" to="." method="OnBtnBackPressed"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Godot Mesh2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Godot Mesh2/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, -3.55271e-15, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_ud4ma")
+
+[node name="Player (Menu)" parent="." instance=ExtResource("13_acqow")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00389004, 6.19659, -8.0347)
+
+[connection signal="pressed" from="UI/Title Screen/BtnPlay" to="." method="OnBtnPlayPressed"]
+[connection signal="pressed" from="UI/Title Screen/BtnOptions" to="." method="OnBtnOptionsPressed"]
+[connection signal="pressed" from="UI/Title Screen/BtnExit" to="." method="OnBtnExitPressed"]
+[connection signal="pressed" from="UI/Level Select/BtnBack" to="." method="OnBtnBackPressed"]
+[connection signal="value_changed" from="UI/Options/Container/Slider (and text)/HSlider" to="UI/Options/Container/Slider (and text)/HSlider" method="OnValueChanged"]
+[connection signal="value_changed" from="UI/Options/Container/Slider (and text)2/HSlider" to="UI/Options/Container/Slider (and text)2/HSlider" method="OnValueChanged"]
+[connection signal="value_changed" from="UI/Options/Container/Slider (and text)3/HSlider" to="UI/Options/Container/Slider (and text)3/HSlider" method="OnValueChanged"]
+[connection signal="pressed" from="UI/Options/BtnBack" to="." method="OnBtnBackPressed"]

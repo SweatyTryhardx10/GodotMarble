@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://drxuym5xt5keq"]
+
+[ext_resource type="Material" uid="uid://ctt61l6xpe7hg" path="res://Materials/Displace.tres" id="1_ifveg"]
+[ext_resource type="Script" path="res://Scripts/Boundary.cs" id="2_kc6tm"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_n8pr3"]
+material = ExtResource("1_ifveg")
+subdivide_width = 200
+subdivide_depth = 200
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1uqgy"]
+size = Vector3(1, 10, 1)
+
+[node name="Godot Sea" type="MeshInstance3D"]
+transform = Transform3D(1000, 0, 0, 0, 1, 0, 0, 0, 1000, 12, 0, -2)
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_n8pr3")
+
+[node name="Area3D" type="Area3D" parent="."]
+script = ExtResource("2_kc6tm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
+shape = SubResource("BoxShape3D_1uqgy")

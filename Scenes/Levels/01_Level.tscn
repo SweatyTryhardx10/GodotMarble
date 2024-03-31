@@ -1,13 +1,12 @@
-[gd_scene load_steps=35 format=3 uid="uid://du7lxxhjet31"]
+[gd_scene load_steps=32 format=3 uid="uid://du7lxxhjet31"]
 
 [ext_resource type="Script" path="res://Scripts/LevelManager.cs" id="1_frcld"]
 [ext_resource type="Texture2D" uid="uid://dkbb15e8mv6dk" path="res://Textures/gridbox-prototype/prototype_512x512_purple.png" id="4_30p28"]
 [ext_resource type="Texture2D" uid="uid://c4siiq1mrargy" path="res://Textures/gridbox-prototype/prototype_512x512_grey2.png" id="5_fs7d5"]
 [ext_resource type="Texture2D" uid="uid://dy88vrrt23aru" path="res://Textures/gridbox-prototype/prototype_512x512_orange.png" id="5_p6f6r"]
-[ext_resource type="Material" uid="uid://ctt61l6xpe7hg" path="res://Materials/Displace.tres" id="5_txbla"]
 [ext_resource type="Material" uid="uid://diwtx2i3i2us8" path="res://Materials/emissive_blue.tres" id="5_v5ayg"]
 [ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_yellow.tres" id="6_a85hf"]
-[ext_resource type="Script" path="res://Scripts/Boundary.cs" id="6_cmgqs"]
+[ext_resource type="PackedScene" uid="uid://drxuym5xt5keq" path="res://Prefabs/godot_sea.tscn" id="6_e1lnn"]
 [ext_resource type="PackedScene" uid="uid://ngddmglqy453" path="res://Prefabs/spawn.tscn" id="6_j1j4p"]
 [ext_resource type="PackedScene" uid="uid://c30crp15bwp25" path="res://Prefabs/goal.tscn" id="7_em5wy"]
 [ext_resource type="PackedScene" uid="uid://tfy2lfjm1gsb" path="res://Prefabs/Box_01.tscn" id="8_iualm"]
@@ -60,13 +59,6 @@ data = PackedVector3Array(-0.049, 0, -0.4976, 0, 0.0488, -0.5048, 0, 0, -0.5, -0
 material = ExtResource("5_v5ayg")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_efui3"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_q53kh"]
-material = ExtResource("5_txbla")
-subdivide_width = 200
-subdivide_depth = 200
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_4irjq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k7edg"]
 albedo_texture = ExtResource("5_p6f6r")
@@ -202,17 +194,7 @@ mesh = SubResource("BoxMesh_qv17f")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Wall2/StaticBody3D"]
 shape = SubResource("BoxShape3D_efui3")
 
-[node name="Ground" type="MeshInstance3D" parent="Terrain"]
-transform = Transform3D(1000, 0, 0, 0, 1, 0, 0, 0, 1000, 12, 0, -2)
-cast_shadow = 0
-mesh = SubResource("PlaneMesh_q53kh")
-
-[node name="Area3D" type="Area3D" parent="Terrain/Ground"]
-script = ExtResource("6_cmgqs")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Ground/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-shape = SubResource("BoxShape3D_4irjq")
+[node name="Godot Sea" parent="Terrain" instance=ExtResource("6_e1lnn")]
 
 [node name="Terrain (Dynamic)" type="Node3D" parent="."]
 

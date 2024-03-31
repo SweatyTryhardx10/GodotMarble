@@ -22,7 +22,7 @@ public partial class LevelManager : Node3D
 	{
 		startTime = Time.GetTicksMsec();
 		// GetTree().CreateTimer(3.0d).Timeout += () => { Spawn.Instance.SpawnPlayer(); };
-		Spawn.SpawnPlayer();
+		Spawn.QueueSpawn();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

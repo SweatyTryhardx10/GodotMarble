@@ -22,13 +22,14 @@ public partial class Indicator : TextureRect
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (followTarget == null)
+		if (!IsInstanceValid(followTarget))
 		{
 			TryGetTarget();
 			return;
 		}
 
 		Camera3D cam = GetViewport().GetCamera3D();
+		
 		Vector2 viewportSize = GetViewportRect().Size;
 
 		float borderWidth = 30f;

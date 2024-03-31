@@ -28,15 +28,25 @@ public partial class Spawn : Node3D
 			SpawnPlayer();
 	}
 
-	public static void SpawnPlayer()
+	public static void QueueSpawn()
 	{
+		// Is the current spawn a valid instance?
 		if (!IsInstanceValid(Instance))
 			return;
+			
+		Instance.CallDeferred("SpawnPlayer");
+	}
 
+	private async void SpawnPlayer()
+	{
+		// Wait one frame
+		await ToSignal(Instance.GetTree(), SceneTree.SignalName.ProcessFrame);
+		
+		// Does a valid instance of the player exist?
 		if (!IsInstanceValid(PlayerController.Instance))
 		{
 			PlayerController player = Instance.playerPrefab.Instantiate<PlayerController>();
-			player.TreeEntered += PositionPlayer;	// Position player after they have entered the tree
+			player.TreeEntered += PositionPlayer;   // Position player after they have entered the tree
 			Instance.GetTree().Root.CallDeferred(MethodName.AddChild, player);  // For some reason, this method call must be 'deferred' otherwise
 																				// the child is added before the tree is built
 		}
