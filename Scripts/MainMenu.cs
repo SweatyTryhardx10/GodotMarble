@@ -19,6 +19,8 @@ public partial class MainMenu : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		SaveLoadUtil.SaveData saveData = SaveLoadUtil.LoadGame();
+		
 		for (int i = 0; i < levels.Length; i++)
 		{
 			// Instantiate button
@@ -31,7 +33,9 @@ public partial class MainMenu : Node
 			// Change text on nested label on button
 			string sceneFileName = levels[i].ResourcePath.Split('/').Last();
 			string btnText = sceneFileName.Split('.').First().Replace('_', ' ');
-			btn.GetNode<Label>("Label").Text = btnText;
+			btn.GetNode<Label>("Name").Text = btnText;
+			string timeText = (saveData.GetLevelTime(i) < 0f) ? "not completed" : HUD.SecondsToTimerFormat(saveData.GetLevelTime(i) / 1000.0f);
+			btn.GetNode<Label>("Time").Text = timeText;
 
 			// Add button to the button group
 			levelButtonGroup.AddChild(btn);
@@ -74,6 +78,8 @@ public partial class MainMenu : Node
 			var hud = hudPrefab.Instantiate();
 			GetTree().Root.AddChild(hud);
 		}
+		
+		LevelManager.loadedLevelIndex = sceneIndex;
 
 		GD.Print($"Scene {sceneIndex} loaded!");
 	}

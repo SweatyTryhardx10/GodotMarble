@@ -27,6 +27,8 @@ public partial class Goal : Node3D
 		{
 			HUD.ShowSummaryScreen();
 			
+			LevelManager.CompleteLevel();
+			
 			particles.Emitting = true;
 		}
 	}

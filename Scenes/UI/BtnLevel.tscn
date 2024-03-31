@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://x2jkh8gddge6"]
+[gd_scene load_steps=4 format=3 uid="uid://x2jkh8gddge6"]
 
 [ext_resource type="Theme" uid="uid://r2cg7b41e161" path="res://UI_Theme.tres" id="1_xlw1p"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_pp6nl"]
 font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_nro5q"]
 
 [node name="BtnLevel" type="Button"]
 custom_minimum_size = Vector2(140, 100)
@@ -12,15 +14,34 @@ offset_bottom = 100.0
 size_flags_horizontal = 3
 theme = ExtResource("1_xlw1p")
 
-[node name="Label" type="Label" parent="."]
+[node name="Name" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 14
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.5
+offset_top = -25.655
+offset_bottom = 8.34501
 grow_horizontal = 2
 grow_vertical = 2
 text = "level"
 label_settings = SubResource("LabelSettings_pp6nl")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Time" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 0.674999
+offset_bottom = 23.675
+grow_horizontal = 2
+grow_vertical = 2
+text = "00:00.00"
+label_settings = SubResource("LabelSettings_nro5q")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2

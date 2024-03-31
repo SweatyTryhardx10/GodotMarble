@@ -29,7 +29,7 @@ public partial class HUD : Control
 	{
 	}
 
-	private static string SecondsToTimerFormat(double value)
+	public static string SecondsToTimerFormat(double value)
 	{
 		int minutes = (int)Math.Floor(value / 60);
 		int seconds = (int)value % 60;
@@ -65,7 +65,8 @@ public partial class HUD : Control
 		summaryScreen.Visible = false;
 		Input.MouseMode = Input.MouseModeEnum.Captured;
 
-		Spawn.SpawnPlayer();
+		LevelManager.ReloadLevel();
+		// Spawn.SpawnPlayer();
 	}
 
 	private void OnBtnContinuePressed()
