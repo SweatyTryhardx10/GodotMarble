@@ -10,8 +10,8 @@
 [ext_resource type="Theme" uid="uid://r2cg7b41e161" path="res://UI_Theme.tres" id="7_pijqp"]
 [ext_resource type="PackedScene" uid="uid://c6r2fwt85ovpb" path="res://Scenes/HUD.tscn" id="7_u1rs8"]
 [ext_resource type="Material" uid="uid://diwtx2i3i2us8" path="res://Materials/emissive_blue.tres" id="9_o13sm"]
-[ext_resource type="Script" path="res://Scenes/VolumeSlider.cs" id="9_prsiu"]
-[ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_yellow.tres" id="10_0ogib"]
+[ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_orange.tres" id="10_0ogib"]
+[ext_resource type="Script" path="res://Scripts/VolumeSlider.cs" id="10_sf7si"]
 [ext_resource type="Texture2D" uid="uid://dy88vrrt23aru" path="res://Textures/gridbox-prototype/prototype_512x512_orange.png" id="11_r22l6"]
 [ext_resource type="PackedScene" uid="uid://bkhd1lfx0le0b" path="res://Prefabs/player_menu.tscn" id="13_acqow"]
 
@@ -259,7 +259,7 @@ grow_horizontal = 2
 text = "Master Volume"
 horizontal_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="UI/Options/Container/Slider (and text)"]
+[node name="Master" type="HSlider" parent="UI/Options/Container/Slider (and text)"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -272,7 +272,7 @@ offset_right = 174.5
 grow_horizontal = 2
 grow_vertical = 0
 value = 80.0
-script = ExtResource("9_prsiu")
+script = ExtResource("10_sf7si")
 
 [node name="Slider (and text)2" type="Control" parent="UI/Options/Container"]
 layout_mode = 1
@@ -291,7 +291,7 @@ grow_horizontal = 2
 text = "Music Volume"
 horizontal_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="UI/Options/Container/Slider (and text)2"]
+[node name="Music" type="HSlider" parent="UI/Options/Container/Slider (and text)2"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -304,7 +304,7 @@ offset_right = 174.5
 grow_horizontal = 2
 grow_vertical = 0
 value = 100.0
-script = ExtResource("9_prsiu")
+script = ExtResource("10_sf7si")
 busName = "Music"
 
 [node name="Slider (and text)3" type="Control" parent="UI/Options/Container"]
@@ -324,7 +324,7 @@ grow_horizontal = 2
 text = "Sound Effects Volume"
 horizontal_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="UI/Options/Container/Slider (and text)3"]
+[node name="SFX" type="HSlider" parent="UI/Options/Container/Slider (and text)3"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -337,7 +337,7 @@ offset_right = 174.5
 grow_horizontal = 2
 grow_vertical = 0
 value = 100.0
-script = ExtResource("9_prsiu")
+script = ExtResource("10_sf7si")
 busName = "SFX"
 
 [node name="BtnBack" type="Button" parent="UI/Options"]
@@ -468,7 +468,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00389004, 6.19659, -8.0347
 [connection signal="pressed" from="UI/Title Screen/BtnOptions" to="." method="OnBtnOptionsPressed"]
 [connection signal="pressed" from="UI/Title Screen/BtnExit" to="." method="OnBtnExitPressed"]
 [connection signal="pressed" from="UI/Level Select/BtnBack" to="." method="OnBtnBackPressed"]
-[connection signal="value_changed" from="UI/Options/Container/Slider (and text)/HSlider" to="UI/Options/Container/Slider (and text)/HSlider" method="OnValueChanged"]
-[connection signal="value_changed" from="UI/Options/Container/Slider (and text)2/HSlider" to="UI/Options/Container/Slider (and text)2/HSlider" method="OnValueChanged"]
-[connection signal="value_changed" from="UI/Options/Container/Slider (and text)3/HSlider" to="UI/Options/Container/Slider (and text)3/HSlider" method="OnValueChanged"]
+[connection signal="value_changed" from="UI/Options/Container/Slider (and text)/Master" to="UI/Options/Container/Slider (and text)/Master" method="OnValueChanged"]
+[connection signal="value_changed" from="UI/Options/Container/Slider (and text)2/Music" to="UI/Options/Container/Slider (and text)2/Music" method="OnValueChanged"]
+[connection signal="value_changed" from="UI/Options/Container/Slider (and text)3/SFX" to="UI/Options/Container/Slider (and text)3/SFX" method="OnValueChanged"]
 [connection signal="pressed" from="UI/Options/BtnBack" to="." method="OnBtnBackPressed"]

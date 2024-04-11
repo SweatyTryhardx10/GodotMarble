@@ -7,7 +7,8 @@ using System.Runtime.CompilerServices;
 
 public static class SaveLoadUtil
 {
-    private const string filePath = "user://godotMarble.save";
+    private const string savePath = "user://godotMarble.save";
+    private const string configPath = "user://godotMarble.config";
 
     // Save data struct for working with the data (instead of json)
     public struct SaveData
@@ -61,8 +62,8 @@ public static class SaveLoadUtil
         //  - Level completion times ( <0 if not completed)
 
         // Create save file, if it doesn't exist
-        if (!FileAccess.FileExists(filePath))
-            FileAccess.Open(filePath, FileAccess.ModeFlags.Write);
+        if (!FileAccess.FileExists(savePath))
+            FileAccess.Open(savePath, FileAccess.ModeFlags.Write);
 
         // Open existing save data
         SaveData save = LoadGame();
@@ -76,7 +77,7 @@ public static class SaveLoadUtil
 
         save.SetLevelTime(levelIndex, time);
 
-        using var file = FileAccess.Open(filePath, FileAccess.ModeFlags.Write);
+        using var file = FileAccess.Open(savePath, FileAccess.ModeFlags.Write);
 
         GD.Print($"Levels to save: {save.Length}");
 
@@ -102,10 +103,10 @@ public static class SaveLoadUtil
     public static SaveData LoadGame()
     {
         // Return empty save data
-        if (!FileAccess.FileExists(filePath))
+        if (!FileAccess.FileExists(savePath))
             return new SaveData();
 
-        using var data = FileAccess.Open(filePath, FileAccess.ModeFlags.Read);
+        using var data = FileAccess.Open(savePath, FileAccess.ModeFlags.Read);
 
         List<float> completionTimes = new List<float>();
         while (data.GetPosition() < data.GetLength())
@@ -131,5 +132,56 @@ public static class SaveLoadUtil
 
         // Return save data struct
         return new SaveData(completionTimes.ToArray());
+    }
+
+    public static void SaveConfig()
+    {
+        // Create config file, if it doesn't exist
+        if (!FileAccess.FileExists(configPath)) { }
+        FileAccess.Open(configPath, FileAccess.ModeFlags.Write);
+
+        using var file = FileAccess.Open(configPath, FileAccess.ModeFlags.Write);
+
+        Godot.Collections.Dictionary<string, Variant> configs = new Godot.Collections.Dictionary<string, Variant>();
+
+        // Save the value for each volume slider in the dictionary
+        for (int i = 0; i < VolumeSlider.All.Count; i++)
+        {
+            string sliderName = VolumeSlider.All[i].Name;
+            float sliderValue = VolumeSlider.All[i].NormalizedValue;
+            configs.Add(sliderName, sliderValue);
+            
+            GD.Print($"Saving {sliderName} value: {sliderValue}");
+        }
+
+        // Save the dictionary object in the file using Json
+        string jsonString = Json.Stringify(configs);
+        file.StoreLine(jsonString);
+
+        // Close the file
+        file.Close();
+    }
+
+    public static Godot.Collections.Dictionary<string, Variant> LoadConfig()
+    {
+        if (!FileAccess.FileExists(configPath))
+            return new Godot.Collections.Dictionary<string, Variant>();
+
+        using var file = FileAccess.Open(configPath, FileAccess.ModeFlags.Read);
+
+        string jsonString = file.GetLine();
+
+        // Parse string in the json into a json object
+        var json = new Json();
+        var output = json.Parse(jsonString);
+        if (output != Error.Ok)
+        {
+            GD.Print($"JSON Parse Error: {json.GetErrorMessage()} in {jsonString} at line {json.GetErrorLine()}");
+        }
+        
+        // Convert json data to dictionary
+        var configData = new Godot.Collections.Dictionary<string, Variant>((Godot.Collections.Dictionary)json.Data);
+        
+        return configData;
     }
 }
