@@ -1,18 +1,14 @@
 [gd_scene load_steps=7 format=3 uid="uid://tfy2lfjm1gsb"]
 
-[ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_cyan.tres" id="1_w6lmr"]
-[ext_resource type="Texture2D" uid="uid://b1mceqyv2wufm" path="res://Textures/gridbox-prototype/prototype_512x512_brown.png" id="2_kbtkp"]
+[ext_resource type="Material" uid="uid://cnwtdhkhhen8h" path="res://Materials/gridbox-prototype/prototype_512x512_grey1.tres" id="1_lurqy"]
+[ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_orange.tres" id="1_w6lmr"]
+[ext_resource type="Material" uid="uid://bbjoehbnon2kc" path="res://Materials/gridbox-prototype/prototype_512x512_grey4.tres" id="2_bqwv8"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_gkham"]
 material = ExtResource("1_w6lmr")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ksuy"]
-albedo_texture = ExtResource("2_kbtkp")
-uv1_triplanar = true
-uv1_world_triplanar = true
-
 [sub_resource type="BoxMesh" id="BoxMesh_iwfd6"]
-material = SubResource("StandardMaterial3D_6ksuy")
+material = ExtResource("2_bqwv8")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_d6hfg"]
 
@@ -21,6 +17,7 @@ material = SubResource("StandardMaterial3D_6ksuy")
 [node name="Mesh" type="Node3D" parent="."]
 
 [node name="Box (Mesh)" type="MeshInstance3D" parent="Mesh"]
+material_override = ExtResource("1_lurqy")
 mesh = SubResource("BoxMesh_gkham")
 skeleton = NodePath("../..")
 

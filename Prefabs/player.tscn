@@ -13,7 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://bmbc1c0kkqv6y" path="res://Sounds/jump1.wav" id="7_324x4"]
 [ext_resource type="AudioStream" uid="uid://cfti2c5dufkht" path="res://Sounds/jump2.wav" id="8_0ksb4"]
 [ext_resource type="Texture2D" uid="uid://bn0338abi7sjn" path="res://Textures/Asphalt/PatchedAsphalt_Roughness.png" id="8_t6m1l"]
-[ext_resource type="Script" path="res://Prefabs/RigidBodyInterpolater.cs" id="9_q2ba5"]
+[ext_resource type="Script" path="res://Scripts/RigidBodyInterpolater.cs" id="9_q2ba5"]
 [ext_resource type="AudioStream" uid="uid://c485w4sei0gm5" path="res://Sounds/jump3.wav" id="9_s4cq8"]
 [ext_resource type="AudioStream" uid="uid://4mj18ep768yi" path="res://Sounds/525096__jomse__plasticimpacta7.wav" id="10_vi4sv"]
 [ext_resource type="Material" uid="uid://bw8nf2roikgfe" path="res://Materials/Particles/particle_xxx.tres" id="16_nv02g"]

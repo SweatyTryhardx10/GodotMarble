@@ -1,16 +1,17 @@
 [gd_scene load_steps=7 format=3 uid="uid://bsi8bbyjdjf1j"]
 
 [ext_resource type="Script" path="res://Scripts/BouncePad.cs" id="1_ytfcy"]
-[ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_orange.tres" id="2_eaguu"]
-[ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_grey4.tres" id="3_emidu"]
+[ext_resource type="Material" uid="uid://d1l541dhfd247" path="res://Materials/gridbox-prototype/prototype_512x512_white.tres" id="2_8rf2w"]
+[ext_resource type="Material" uid="uid://cctisxflce1o5" path="res://Materials/gridbox-prototype/prototype_512x512_blue.tres" id="3_oaojf"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_7arv7"]
 height = 0.2
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_uaeb5"]
+material = ExtResource("2_8rf2w")
 
 [sub_resource type="TorusMesh" id="TorusMesh_74lmr"]
-material = ExtResource("3_emidu")
+material = ExtResource("3_oaojf")
 outer_radius = 0.734
 
 [node name="BouncePad" type="Node3D" node_paths=PackedStringArray("mesh")]
@@ -25,7 +26,6 @@ shape = SubResource("CylinderShape3D_7arv7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0, 0)
-material_override = ExtResource("2_eaguu")
 mesh = SubResource("CylinderMesh_uaeb5")
 skeleton = NodePath("")
 
