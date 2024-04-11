@@ -1,8 +1,8 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://brkqlb8r7dwp0"]
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://d1l541dhfd247"]
 
-[ext_resource type="Texture2D" uid="uid://dhgiwup3v8x1h" path="res://Textures/gridbox-prototype/prototype_512x512_white.png" id="1_ts37q"]
+[ext_resource type="Texture2D" uid="uid://dhgiwup3v8x1h" path="res://Textures/gridbox-prototype/prototype_512x512_white.png" id="1_d07np"]
 
 [resource]
-albedo_texture = ExtResource("1_ts37q")
+albedo_texture = ExtResource("1_d07np")
 uv1_triplanar = true
 uv1_world_triplanar = true

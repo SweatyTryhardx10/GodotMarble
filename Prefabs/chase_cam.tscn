@@ -59,5 +59,4 @@ smoothing = 8.0
 mouseSensitivity = 1.0
 
 [node name="motion_blur" parent="." instance=ExtResource("2_28yqe")]
-visible = false
 surface_material_override/0 = SubResource("ShaderMaterial_u6u8h")

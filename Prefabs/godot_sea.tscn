@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://drxuym5xt5keq"]
 
-[ext_resource type="Material" uid="uid://ctt61l6xpe7hg" path="res://Materials/Displace.tres" id="1_ifveg"]
+[ext_resource type="Material" uid="uid://ctt61l6xpe7hg" path="res://Materials/GodotSea.tres" id="1_ifveg"]
 [ext_resource type="Script" path="res://Scripts/Boundary.cs" id="2_kc6tm"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_n8pr3"]
