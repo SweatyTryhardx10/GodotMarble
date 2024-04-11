@@ -29,7 +29,7 @@ public partial class PlayerController : RigidBody3D
 		if (spawnCamera)
 		{
 			var cam = cameraPrefab.Instantiate<ChaseCamera>();
-			cam.target = this;
+			cam.target = meshNode;
 			GetParent().AddChild(cam);
 		}
 	}
@@ -62,6 +62,7 @@ public partial class PlayerController : RigidBody3D
 	[Export] private ParticleCustom slamParticles;
 	[Export] private ParticleCustom landParticles;
 	[Export] private PackedScene cameraPrefab;
+	[Export] private Node3D meshNode;
 	private bool isSlamming = false;
 
 	[Export] private bool spawnCamera = true;

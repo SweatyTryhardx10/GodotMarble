@@ -1,15 +1,13 @@
-[gd_scene load_steps=42 format=3 uid="uid://d2w71o2tt8tlg"]
+[gd_scene load_steps=40 format=3 uid="uid://d2w71o2tt8tlg"]
 
-[ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_yellow.tres" id="1_0shw6"]
 [ext_resource type="PackedScene" uid="uid://ngddmglqy453" path="res://Prefabs/spawn.tscn" id="1_4ar1a"]
 [ext_resource type="Script" path="res://Scripts/LevelManager.cs" id="1_d2nsm"]
 [ext_resource type="Texture2D" uid="uid://ffy4bbt533rm" path="res://Textures/gridbox-prototype/prototype_512x512_green1.png" id="2_0iixh"]
 [ext_resource type="PackedScene" uid="uid://c30crp15bwp25" path="res://Prefabs/goal.tscn" id="2_bt84v"]
 [ext_resource type="PackedScene" uid="uid://drxuym5xt5keq" path="res://Prefabs/godot_sea.tscn" id="4_eyoqi"]
-[ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_green1.tres" id="5_0vqqq"]
 [ext_resource type="PackedScene" uid="uid://tfy2lfjm1gsb" path="res://Prefabs/Box_01.tscn" id="5_gy5as"]
 [ext_resource type="Material" uid="uid://diwtx2i3i2us8" path="res://Materials/emissive_blue.tres" id="6_5kkep"]
-[ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_grey1.tres" id="7_scvs4"]
+[ext_resource type="Material" uid="uid://brkqlb8r7dwp0" path="res://Materials/gridbox-prototype/prototype_512x512_yellow.tres" id="7_scvs4"]
 [ext_resource type="PackedScene" uid="uid://bsi8bbyjdjf1j" path="res://Prefabs/bounce_pad.tscn" id="9_jfld1"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_xhn3g"]
@@ -109,7 +107,7 @@ script = ExtResource("1_d2nsm")
 
 [node name="Start Platform" type="MeshInstance3D" parent="Environment"]
 transform = Transform3D(9.27355, 0, 0, 0, 1, 0, 0, 0, 7.36781, 0, 2.10617, 0)
-material_override = ExtResource("1_0shw6")
+material_override = ExtResource("7_scvs4")
 mesh = SubResource("BoxMesh_xhn3g")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Environment/Start Platform"]
@@ -119,7 +117,7 @@ shape = SubResource("BoxShape3D_f261v")
 
 [node name="Start Platform6" type="MeshInstance3D" parent="Environment"]
 transform = Transform3D(9.27355, 0, 0, 0, 1, 0, 0, 0, 14.1224, 26.285, 5.77369, -15.4366)
-material_override = ExtResource("1_0shw6")
+material_override = ExtResource("7_scvs4")
 mesh = SubResource("BoxMesh_xhn3g")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Environment/Start Platform6"]
@@ -350,7 +348,7 @@ shape = SubResource("CylinderShape3D_8agv6")
 
 [node name="Torus" type="MeshInstance3D" parent="Environment"]
 transform = Transform3D(6.38577, 0, 0, 0, 6.15156, 0, 0, 0, 16.0214, 40.387, 6.96033, -26.8688)
-material_override = ExtResource("5_0vqqq")
+material_override = ExtResource("7_scvs4")
 mesh = SubResource("TorusMesh_gxa7v")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Environment/Torus"]
@@ -360,7 +358,7 @@ shape = SubResource("ConcavePolygonShape3D_ti3jg")
 
 [node name="Torus2" type="MeshInstance3D" parent="Environment"]
 transform = Transform3D(4.55526, 0, 0, 0, 4.38819, 0, 0, 0, 11.4288, 40.387, 6.60586, -26.8688)
-material_override = ExtResource("5_0vqqq")
+material_override = ExtResource("7_scvs4")
 mesh = SubResource("TorusMesh_gxa7v")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Environment/Torus2"]
@@ -370,7 +368,7 @@ shape = SubResource("ConcavePolygonShape3D_ti3jg")
 
 [node name="Torus3" type="MeshInstance3D" parent="Environment"]
 transform = Transform3D(2.55702, 0, 0, 0, 2.46324, 0, 0, 0, 6.41538, 40.387, 6.08354, -26.8688)
-material_override = ExtResource("5_0vqqq")
+material_override = ExtResource("7_scvs4")
 mesh = SubResource("TorusMesh_gxa7v")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Environment/Torus3"]
@@ -380,7 +378,7 @@ shape = SubResource("ConcavePolygonShape3D_ti3jg")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Environment"]
 transform = Transform3D(-5.88988e-07, 0, 0.59686, 0, 7.88515, 0, -13.4745, 0, -2.60896e-08, 45.8928, 10.891, -22.5045)
-material_override = ExtResource("5_0vqqq")
+material_override = ExtResource("7_scvs4")
 mesh = SubResource("PrismMesh_eesir")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Environment/MeshInstance3D"]
@@ -390,7 +388,7 @@ shape = SubResource("ConcavePolygonShape3D_2i2gb")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Environment"]
 transform = Transform3D(-5.88988e-07, 0, 0.59686, 0, 7.88515, 0, -13.4745, 0, -2.60896e-08, 44.3011, 10.891, -22.5045)
-material_override = ExtResource("5_0vqqq")
+material_override = ExtResource("7_scvs4")
 mesh = SubResource("PrismMesh_eesir")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Environment/MeshInstance3D2"]
