@@ -22,6 +22,9 @@ public partial class ChaseCamera : Camera3D
     {
         get
         {
+            // Disable smoothing below (note: smoothing is no longer needed after implementing rigidbody interpolation)
+            return target.GlobalPosition;
+            
             Vector3 sum = Vector3.Zero;
             for (int i = 0; i < targetPositionBuffer.Length; i++)
             {

@@ -1,10 +1,11 @@
-[gd_scene load_steps=25 format=3 uid="uid://dclstik3gb257"]
+[gd_scene load_steps=26 format=3 uid="uid://dclstik3gb257"]
 
 [ext_resource type="Texture2D" uid="uid://p2yerrtjjfkl" path="res://icon.svg" id="1_mvofy"]
 [ext_resource type="Script" path="res://Scripts/MainMenu.cs" id="1_ngsuk"]
 [ext_resource type="PackedScene" uid="uid://x2jkh8gddge6" path="res://Scenes/UI/BtnLevel.tscn" id="3_q3egg"]
 [ext_resource type="PackedScene" uid="uid://o6mq3phmufrm" path="res://Scenes/Levels/02_Level.tscn" id="3_tuev7"]
 [ext_resource type="PackedScene" uid="uid://d2w71o2tt8tlg" path="res://Scenes/Levels/03_Level.tscn" id="4_p6215"]
+[ext_resource type="PackedScene" uid="uid://dsk0h6euacdb7" path="res://Scenes/Levels/04_Level.tscn" id="5_dqerd"]
 [ext_resource type="PackedScene" uid="uid://du7lxxhjet31" path="res://Scenes/Levels/01_Level.tscn" id="5_he7c6"]
 [ext_resource type="Theme" uid="uid://r2cg7b41e161" path="res://UI_Theme.tres" id="7_pijqp"]
 [ext_resource type="PackedScene" uid="uid://c6r2fwt85ovpb" path="res://Scenes/HUD.tscn" id="7_u1rs8"]
@@ -53,7 +54,7 @@ material = SubResource("StandardMaterial3D_8l6yg")
 
 [node name="Main Menu (Root)" type="Node3D" node_paths=PackedStringArray("titlePanel", "levelSelectPanel", "levelButtonGroup", "optionsPanel")]
 script = ExtResource("1_ngsuk")
-levels = Array[PackedScene]([ExtResource("5_he7c6"), ExtResource("3_tuev7"), ExtResource("4_p6215")])
+levels = Array[PackedScene]([ExtResource("5_he7c6"), ExtResource("3_tuev7"), ExtResource("4_p6215"), ExtResource("5_dqerd")])
 titlePanel = NodePath("UI/Title Screen")
 levelSelectPanel = NodePath("UI/Level Select")
 levelButtonGroup = NodePath("UI/Level Select/GridContainer")
